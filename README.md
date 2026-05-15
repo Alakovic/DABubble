@@ -1,5 +1,6 @@
 # DABubble
 
+<<<<<<< HEAD
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
 
 ## Development server
@@ -57,3 +58,28 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+DABubble is a collaborative business chat application inspired by Slack and Discord.
+
+The application allows users to communicate in real time through channels and direct messages. Users can create channels, react to messages, manage conversations and collaborate efficiently within a workspace environment.
+
+## Features
+
+- User authentication
+- Real-time messaging
+- Channel system
+- Direct messages
+- Thread conversations
+- Emoji reactions
+- User mentions
+- Responsive design
+- Firebase integration
+
+## Technologies
+
+- Angular
+- TypeScript
+- Firebase
+- SCSS
+- HTML
+>>>>>>> cdf2626cfda35db426cf4ebd2e38a39c1d6ddecd

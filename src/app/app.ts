@@ -8,19 +8,22 @@ import { Intro } from './shared/intro/intro';
   standalone: true,
   imports: [RouterOutlet, Header, Intro],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
+  styleUrls: ['./app.scss'],
 })
-export class App implements OnInit {
+export class App  {
   protected readonly title = signal('DABubble');
 
   showIntro = signal(sessionStorage.getItem('hasSeenIntro') === null);
 
+
+
+  
   ngOnInit() {
     if (this.showIntro()) {
       setTimeout(() => {
         sessionStorage.setItem('hasSeenIntro', 'true');
         this.showIntro.set(false);
-      }, 5000);
+      }, 3500);
     }
   }
 }

@@ -1,0 +1,65 @@
+@use '../abstracts/variables' as v;
+
+.intro {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  overflow: hidden;
+  position: relative;
+  animation: moveToCorner 1s ease forwards;
+  animation-delay: 2.5s;
+  &__logo {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    animation: moveLogo 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+  &__text {
+    font-size: 60px;
+    font-weight: 700;
+    color: v.$text-white;
+    opacity: 0;
+    transform: translateX(-40px);
+    position: absolute;
+    animation: showText 1s ease forwards;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes showText {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(110px);
+  }
+}
+
+@keyframes moveLogo {
+  from {
+    left: 50%;
+  }
+
+  to {
+    left: 38%;
+  }
+}
+
+@keyframes moveToCorner {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-30vw, -40vh) scale(0.7);
+  }
+}

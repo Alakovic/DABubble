@@ -11,4 +11,6 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './login.html',
   styleUrls: ['./login.scss'] ,
 })
-export class Login {}
+export class Login {
+  isTrue: boolean = true;
+}

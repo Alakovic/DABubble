@@ -1,0 +1,45 @@
+<section class="theme">
+  <div class="container">
+    <div class="login">
+      <div class="login__card">
+        <div class="login__card-header">
+          <h1 class="login__card-title">Anmeldung</h1>
+          <p class="login__card-subtitle">
+            Wir empfehlen Ihnen, die E-Mail-Adresse zu nutzen, die Sie bei der Arbeit verwenden
+          </p>
+        </div>
+        <form class="login__card-form">
+          <label class="login__card-form-field">
+            <mat-icon matPrefix class="login__icon material-symbols-outlined">mail</mat-icon>
+            <input
+              class="login__input"
+              matInput
+              type="email"
+              placeholder="beispielname@email.com"
+            />
+          </label>
+          <label class="login__card-form-field">
+            <mat-icon matPrefix class="login__icon material-symbols-outlined">lock</mat-icon>
+            <input class="login__input" matInput type="password" placeholder="Passwort" />
+          </label>
+          <button type="button" class="btn btn--link">Passwort vergessen?</button>
+          <div class="login__divider">
+            <span>ODER</span>
+          </div>
+          <button type="button" class="btn btn--google">
+            <img class="btn__icon" src="/assets/img/google.svg" alt="Google Icon" />
+            <p class="btn__text">Anmelden mit Google</p>
+          </button>
+          <div class="login__buttons">
+            <button type="submit" class="btn btn--primary">Anmelden</button>
+            <button type="button" class="btn btn--secondary">Gäste-Login</button>
+          </div>
+        </form>
+      </div>
+      <div class="login__legal-buttons">
+        <button type="button" class="btn btn--tertiary">Impressum</button>
+        <button type="button" class="btn btn--tertiary">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</section>

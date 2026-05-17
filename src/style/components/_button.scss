@@ -1,0 +1,74 @@
+@use '../abstracts/variables' as v;
+
+.btn {
+  border-radius: 25px;
+  padding: 5px 15px;
+  font-weight: 500;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  &--primary {
+    background-color: v.$btn-primary;
+    border: none;
+    color: v.$text-white;
+    font-size: 20px;
+    padding: 10px 20px;
+    &:hover {
+      background-color: v.$btn-primary-hover;
+      cursor: pointer;
+    }
+  }
+
+  &--secondary {
+    background-color: v.$btn-secondary;
+    border: 1px solid v.$btn-secondary-border;
+    color: v.$text-blue-dark;
+    font-size: 20px;
+    padding: 10px 20px;
+    &:hover {
+      background-color: v.$btn-secondary-hover;
+      color: v.$text-white;
+      cursor: pointer;
+    }
+  }
+
+  &--tertiary {
+    background-color: v.$btn-tertiary;
+    border: 1px solid transparent;
+    color: v.$text-blue;
+    &:hover {
+      border: 1px solid v.$btn-tertiary-border;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+  &--link {
+    background-color: transparent;
+    border: none;
+    color: v.$text-blue;
+    align-self: center;
+    font-size: 20px;
+
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--google {
+    background-color: v.$bg-gray;
+    border: 1px solid transparent;
+    color: v.$text-blue;
+    font-size: 20px;
+
+    &:hover {
+      border: 1px solid v.$btn-secondary-hover;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+}

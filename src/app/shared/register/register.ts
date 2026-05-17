@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import {  MatIconModule } from '@angular/material/icon';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  standalone: true,
+  imports: [MatIconModule, RouterLink],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
+  styleUrls: ['./register.scss']  ,
 })
 export class Register {}

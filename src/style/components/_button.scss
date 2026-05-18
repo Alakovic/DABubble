@@ -16,6 +16,7 @@
     color: v.$text-white;
     font-size: 20px;
     padding: 10px 20px;
+    align-self: flex-end;
     &:hover {
       background-color: v.$btn-primary-hover;
       cursor: pointer;

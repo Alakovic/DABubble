@@ -10,35 +10,35 @@
           </p>
         </div>
         <form class="register__card-form">
-          <label class="login__card-form-field">
-            <mat-icon matPrefix class="login__icon material-symbols-outlined">person</mat-icon>
-            <input class="login__input" matInput type="text" placeholder="Name und Nachname" />
+          <label class="register__card-form-field">
+            <mat-icon matPrefix class="register__icon material-symbols-outlined">person</mat-icon>
+            <input class="register__input" matInput type="text" placeholder="Name und Nachname" />
           </label>
-          <label class="login__card-form-field">
-            <mat-icon matPrefix class="login__icon material-symbols-outlined">mail</mat-icon>
+          <label class="register__card-form-field">
+            <mat-icon matPrefix class="register__icon material-symbols-outlined">mail</mat-icon>
             <input
-              class="login__input"
+              class="register__input"
               matInput
               type="email"
               placeholder="beispielname@email.com"
             />
           </label>
-          <label class="login__card-form-field">
-            <mat-icon matPrefix class="login__icon material-symbols-outlined">lock</mat-icon>
-            <input class="login__input" matInput type="password" placeholder="Passwort" />
+          <label class="register__card-form-field">
+            <mat-icon matPrefix class="register__icon material-symbols-outlined">lock</mat-icon>
+            <input class="register__input" matInput type="password" placeholder="Passwort" />
           </label>
           <label class="register__checkbox">
             <input type="checkbox" />
-            <span>
+            <span class="register__checkbox-text">
               Ich stimme der
-              <a routerLink="/datenschutz">Datenschutzerklärung</a>
+              <a class="register__checkbox-link">Datenschutzerklärung</a>
               zu.
             </span>
           </label>
           <button class="btn btn--primary" type="submit">Weiter</button>
         </form>
       </div>
-      <div class="login__legal-buttons">
+      <div class="register__legal-buttons">
         <button type="button" class="btn btn--tertiary">Impressum</button>
         <button type="button" class="btn btn--tertiary">Datenschutz</button>
       </div>

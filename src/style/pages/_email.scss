@@ -1,6 +1,6 @@
 @use '../abstracts/variables' as v;
 
-.register {
+.email {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,6 +37,16 @@
     text-align: center;
   }
 
+  &__card-info {
+    font-size: 20px;
+    color: v.$text-gray;
+    padding-bottom: 30px;
+    text-align: center;
+    padding-inline: 30px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+  }
+
   &__card-form {
     display: flex;
     flex-direction: column;
@@ -58,7 +68,7 @@
     &:focus-within {
       border: 1px solid v.$text-gray;
     }
-    &:focus-within .register__icon {
+    &:focus-within .email__icon {
       color: v.$text-black;
     }
   }
@@ -78,56 +88,6 @@
     &:focus-within {
       color: v.$text-black;
     }
-  }
-
-  &__checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: v.$text-black;
-    padding-bottom: 15px;
-    input[type='checkbox'] {
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid v.$text-blue;
-      border-radius: 2px;
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: v.$bg-gray;
-        cursor: pointer;
-      }
-
-      &:checked {
-        background-color: v.$text-blue;
-      }
-
-      &:checked::after {
-        content: '✔';
-        color: white;
-        font-size: 12px;
-      }
-    }
-  }
-  &__checkbox-link {
-    color: v.$text-blue;
-    text-decoration: none;
-    padding: 5px;
-    &:hover {
-      color: v.$text-blue-dark;
-      background-color: v.$bg-gray;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-  }
-  &__checkbox-text {
-    font-size: 18px;
   }
 
   &__buttons {

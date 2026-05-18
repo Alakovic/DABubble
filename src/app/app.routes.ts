@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './shared/login/login';
 import { Register } from './shared/register/register';
 import { SendEmail } from './shared/send-email/send-email';
+import { Avatar } from './shared/avatar/avatar';
 
 export const routes: Routes = [
     {
@@ -15,5 +16,9 @@ export const routes: Routes = [
     {
         path: 'send-email',
         component:SendEmail
+    },
+    {
+        path: 'select-avatar',
+        component: Avatar
     }
 ];

@@ -9,33 +9,98 @@
             Mit Ihrem Namen und Ihrer E-Mail-Adresse haben Sie Ihr neues DABubble-Konto.
           </p>
         </div>
-        <form class="register__card-form">
-          <label class="register__card-form-field">
-            <mat-icon matPrefix class="register__icon material-symbols-outlined">person</mat-icon>
-            <input class="register__input" matInput type="text" placeholder="Name und Nachname" />
-          </label>
-          <label class="register__card-form-field">
-            <mat-icon matPrefix class="register__icon material-symbols-outlined">mail</mat-icon>
-            <input
-              class="register__input"
-              matInput
-              type="email"
-              placeholder="beispielname@email.com"
-            />
-          </label>
-          <label class="register__card-form-field">
-            <mat-icon matPrefix class="register__icon material-symbols-outlined">lock</mat-icon>
-            <input class="register__input" matInput type="password" placeholder="Passwort" />
-          </label>
-          <label class="register__checkbox">
-            <input type="checkbox" />
-            <span class="register__checkbox-text">
-              Ich stimme der
-              <a class="register__checkbox-link">Datenschutzerklärung</a>
-              zu.
-            </span>
-          </label>
-          <button class="btn btn--primary" type="submit">Weiter</button>
+        <form class="register__card-form" [formGroup]="userform" (ngSubmit)="sendData()">
+          <div class="register__field">
+            <label class="register__card-form-field">
+              <mat-icon matPrefix class="register__icon material-symbols-outlined">person</mat-icon>
+              <input
+                class="register__input"
+                matInput
+                type="text"
+                placeholder="Name und Nachname"
+                formControlName="name"
+              />
+            </label>
+            @if (userform.get('name')?.touched) {
+              @if (userform.get('name')?.errors?.['required']) {
+                <div class="register__error-message">Bitte geben Sie Ihren Namen ein.</div>
+              } @else if (userform.get('name')?.errors?.['pattern']) {
+                <div class="register__error-message">Der Name darf keine Zahlen enthalten.</div>
+              } @else if (userform.get('name')?.errors?.['minlength']) {
+                <div class="register__error-message">
+                  Der Name muss mindestens 2 Zeichen lang sein.
+                </div>
+              }
+            }
+          </div>
+          <div class="register__field">
+            <label class="register__card-form-field">
+              <mat-icon matPrefix class="register__icon material-symbols-outlined">mail</mat-icon>
+              <input
+                class="register__input"
+                matInput
+                type="email"
+                placeholder="beispielname@email.com"
+                formControlName="email"
+              />
+            </label>
+            @if (
+              userform.get('email')?.touched &&
+              userform.get('email')?.invalid &&
+              userform.get('email')?.dirty
+            ) {
+              @if (userform.get('email')?.errors?.['required']) {
+                <div class="register__error-message">Bitte geben Sie Ihre E-Mail-Adresse ein.</div>
+              } @else if (userform.get('email')?.errors?.['email']) {
+                <div class="register__error-message">
+                  Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                </div>
+              }
+            }
+          </div>
+          <div class="register__field">
+            <label class="register__card-form-field">
+              <mat-icon matPrefix class="register__icon material-symbols-outlined">lock</mat-icon>
+              <input
+                class="register__input"
+                matInput
+                type="password"
+                placeholder="Passwort"
+                formControlName="password"
+              />
+            </label>
+            @if (
+              userform.get('password')?.touched &&
+              userform.get('password')?.invalid &&
+              userform.get('password')?.dirty
+            ) {
+              @if (userform.get('password')?.errors?.['required']) {
+                <div class="register__error-message">Bitte geben Sie ein Passwort ein.</div>
+              } @else if (userform.get('password')?.errors?.['minlength']) {
+                <div class="register__error-message">
+                  Das Passwort muss mindestens 8 Zeichen lang sein.
+                </div>
+              }
+            }
+          </div>
+          <div class="register__field">
+            <label class="register__checkbox">
+              <input type="checkbox" formControlName="privacy" />
+              <span class="register__checkbox-text">
+                Ich stimme der
+                <a class="register__checkbox-link">Datenschutzerklärung</a>
+                zu.
+              </span>
+            </label>
+            @if (
+              userform.get('privacy')?.touched && userform.get('privacy')?.errors?.['required']
+            ) {
+              <div class="register__error-message register__error-message--checkbox">
+                Bitte akzeptieren Sie die Datenschutzerklärung.
+              </div>
+            }
+          </div>
+          <button class="btn btn--primary" type="submit"   [disabled]="userform.invalid">Weiter</button>
         </form>
       </div>
       <div class="register__legal-buttons">

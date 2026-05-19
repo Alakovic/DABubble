@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { registerDataInterface } from '../interfaces/user-interface';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,9 @@ export class AuthService {
 
   register(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  login(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password);
   }
 }

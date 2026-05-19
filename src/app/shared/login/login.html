@@ -1,5 +1,8 @@
 <section class="theme">
   <div class="container">
+    @if (successMessage()) {
+      <div class="login__success">Konto erfolgreich erstellt!</div>
+    }
     <div class="login">
       <div class="login__card">
         <div class="login__card-header">
@@ -8,7 +11,7 @@
             Wir empfehlen Ihnen, die E-Mail-Adresse zu nutzen, die Sie bei der Arbeit verwenden
           </p>
         </div>
-        <form class="login__card-form">
+        <form [formGroup]="loginForm" class="login__card-form" (ngSubmit)="loginUser()">
           <label class="login__card-form-field">
             <mat-icon matPrefix class="login__icon material-symbols-outlined">mail</mat-icon>
             <input
@@ -16,11 +19,12 @@
               matInput
               type="email"
               placeholder="beispielname@email.com"
+              formControlName="email"
             />
           </label>
           <label class="login__card-form-field">
             <mat-icon matPrefix class="login__icon material-symbols-outlined">lock</mat-icon>
-            <input class="login__input" matInput type="password" placeholder="Passwort" />
+            <input class="login__input" matInput type="password" placeholder="Passwort" formControlName="password" />
           </label>
           <button type="button" class="btn btn--link" routerLink="/send-email">Passwort vergessen?</button>
           <div class="login__divider">

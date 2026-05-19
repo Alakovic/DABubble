@@ -3,6 +3,7 @@ import { Login } from './shared/login/login';
 import { Register } from './shared/register/register';
 import { SendEmail } from './shared/send-email/send-email';
 import { Avatar } from './shared/avatar/avatar';
+import { Workspace } from './shared/workspace/workspace';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'select-avatar',
         component: Avatar
+    },
+    {
+        path: 'workspace',
+        component: Workspace
     }
 ];

@@ -1,17 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDividerModule, RouterLink],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    RouterLink,
+    ReactiveFormsModule,
+  ],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss'] ,
+  styleUrls: ['./login.scss'],
 })
 export class Login {
   isTrue: boolean = true;
+  authService = inject(AuthService);
+  errorMessage = signal<string>('');
+  successMessage = signal<boolean>(false);
+  router = inject(Router);
+
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
+
+  async loginUser() {
+    try {
+      await this.authService.login(
+        this.loginForm.value.email || '',
+        this.loginForm.value.password || '',
+      );
+      this.showSuccessMessage();
+    } catch (error: any) {
+      if (error.code === 'auth/invalid-credentials') {
+        this.errorMessage.set('E-Mail oder Passwort ist falsch');
+      }
+    }
+  }
+
+  showSuccessMessage() {
+    this.successMessage.set(true);
+    this.loginForm.reset();
+    setTimeout(() => {
+      this.router.navigate(['/workspace']);
+    }, 1000);
+  }
 }

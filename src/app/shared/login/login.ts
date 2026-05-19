@@ -7,6 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.class';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,7 @@ import { AuthService } from '../../services/auth.service';
 export class Login {
   isTrue: boolean = true;
   authService = inject(AuthService);
+  userService = inject(UserService);
   errorMessage = signal<string>('');
   successMessage = signal<boolean>(false);
   router = inject(Router);
@@ -54,5 +57,25 @@ export class Login {
     setTimeout(() => {
       this.router.navigate(['/workspace']);
     }, 1000);
+  }
+
+  async googleLogin() {
+    try {
+      const response = await this.authService.googleLogin();
+      const user = this.createGoogleUser(response);
+      await this.userService.addUser(user);
+      this.showSuccessMessage();
+    } catch (error: any) {
+      this.errorMessage.set('Google login failed');
+    }
+  }
+
+  createGoogleUser(response: any): User {
+    return new User({
+      id: response.user.uid,
+      name: response.user.displayName || '',
+      email: response.user.email || '',
+      avatar: response.user.photoURL || '',
+    });
   }
 }

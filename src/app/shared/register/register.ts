@@ -16,6 +16,10 @@ export class Register {
   authService = inject(AuthService);
   router = inject(Router);
 
+  ngOnInit() {
+    this.userform.patchValue(this.authService.registerData());
+  }
+
   userform = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -35,6 +39,6 @@ export class Register {
       password: this.userform.value.password || '',
     });
     console.log(this.authService.registerData());
-     this.router.navigate(['/select-avatar']);
+    this.router.navigate(['/select-avatar']);
   }
 }

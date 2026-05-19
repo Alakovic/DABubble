@@ -1,1 +1,48 @@
-<p>avatar works!</p>
+<section class="theme">
+  <div class="container">
+    @if (successMessage()) {
+      <div class="avatar__success">Konto erfolgreich erstellt!</div>
+    }
+    <div class="avatar">
+      <div class="avatar__card">
+        <div class="avatar__header">
+          <button routerLink="/sign-in" class="btn btn--back">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <h1 class="avatar__card-title">Wählen Ihren Avatar</h1>
+        </div>
+        <div class="avatar__selected">
+          <img
+            [src]="selectedAvatar() || defaultAvatar"
+            alt="Selected Avatar"
+            class="avatar__image"
+          />
+          <span class="avatar__name">{{ authService.registerData().name }}</span>
+        </div>
+        <span class="avatar__text">Aus der Liste wählen</span>
+        <div class="avatar__list">
+          @for (avatar of avatars; track avatar) {
+            <img
+              [src]="avatar"
+              class="avatar__option"
+              [class.avatar__option--active]="selectedAvatar() === avatar"
+              (click)="selectedAvatar.set(avatar)"
+            />
+          }
+        </div>
+        <button class="btn btn--primary" [disabled]="!selectedAvatar()" (click)="createUser()">
+          Konto erstellen
+        </button>
+        @if (errorMessage()) {
+          <div class="avatar__error-message">
+            {{ errorMessage() }}
+          </div>
+        }
+      </div>
+      <div class="avatar__legal-buttons">
+        <button type="button" class="btn btn--tertiary">Impressum</button>
+        <button type="button" class="btn btn--tertiary">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</section>

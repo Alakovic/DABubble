@@ -18,4 +18,10 @@ export class Header {
       this.router.url.startsWith('/new-password')
     );
   }
+
+  hideHeader(): boolean {
+    return (
+      this.router.url === '/workspace' 
+    )
+  }
 }

@@ -45,7 +45,7 @@ export class Login {
       );
       this.showSuccessMessage();
     } catch (error: any) {
-      if (error.code === 'auth/invalid-credentials') {
+      if (error.code === 'auth/invalid-credential') {
         this.errorMessage.set('E-Mail oder Passwort ist falsch');
       }
     }

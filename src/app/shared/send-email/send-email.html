@@ -1,5 +1,8 @@
 <section class="theme">
   <div class="container">
+    @if (successMessage()) {
+      <div class="email__success">{{ successMessage() }}</div>
+    }
     <div class="email">
       <div class="email__card">
         <div class="email__card-header">
@@ -7,20 +10,28 @@
           <h1 class="email__card-title">Passwort zurücksetzen</h1>
           <p class="email__card-subtitle">Bitte geben Sie Ihre E-Mail-Adresse ein.</p>
         </div>
-        <form class="email__card-form">
-          <label class="email__card-form-field">
-            <mat-icon matPrefix class="email__icon material-symbols-outlined">mail</mat-icon>
-            <input
-              class="email__input"
-              matInput
-              type="email"
-              placeholder="beispielname@email.com"
-            />
-          </label>
+        <form class="email__card-form" [formGroup]="emailForm" (ngSubmit)="sendEmail()">
+          <div class="email__field">
+            <label class="email__card-form-field">
+              <mat-icon matPrefix class="email__icon material-symbols-outlined">mail</mat-icon>
+              <input
+                class="email__input"
+                matInput
+                type="email"
+                placeholder="beispielname@email.com"
+                formControlName="email"
+              />
+            </label>
+            @if (errorMessage()) {
+              <div class="email__error-message">
+                {{ errorMessage() }}
+              </div>
+            }
+          </div>
           <p class="email__card-info">
             Wir senden Ihnen eine E-Mail, über die Sie Ihr Passwort ändern können.
           </p>
-          <button class="btn btn--primary" type="submit">E-Mail senden</button>
+          <button class="btn btn--primary" type="submit"  [disabled]="emailForm.invalid">E-Mail senden</button>
         </form>
       </div>
       <div class="email__legal-buttons">

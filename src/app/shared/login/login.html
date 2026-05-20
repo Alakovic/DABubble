@@ -1,7 +1,7 @@
 <section class="theme">
   <div class="container">
     @if (successMessage()) {
-      <div class="login__success">Konto erfolgreich erstellt!</div>
+      <div class="login__success">Anmelden</div>
     }
     <div class="login">
       <div class="login__card">
@@ -12,26 +12,55 @@
           </p>
         </div>
         <form [formGroup]="loginForm" class="login__card-form" (ngSubmit)="loginUser()">
-          <label class="login__card-form-field">
-            <mat-icon matPrefix class="login__icon material-symbols-outlined">mail</mat-icon>
-            <input
-              class="login__input"
-              matInput
-              type="email"
-              placeholder="beispielname@email.com"
-              formControlName="email"
-            />
-          </label>
-          <label class="login__card-form-field">
-            <mat-icon matPrefix class="login__icon material-symbols-outlined">lock</mat-icon>
-            <input
-              class="login__input"
-              matInput
-              type="password"
-              placeholder="Passwort"
-              formControlName="password"
-            />
-          </label>
+          <div class="login__field">
+            <div class="login__form-error">
+              <label class="login__card-form-field">
+                <mat-icon matPrefix class="login__icon material-symbols-outlined">mail</mat-icon>
+                <input
+                  class="login__input"
+                  matInput
+                  type="email"
+                  placeholder="beispielname@email.com"
+                  formControlName="email"
+                />
+              </label>
+              @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+                @if (loginForm.get('email')?.errors?.['required']) {
+                  <div class="login__error-form login__error-form--email">Bitte geben Sie Ihre E-Mail-Adresse ein.</div>
+                } @else if (loginForm.get('email')?.errors?.['email']) {
+                  <div class="login__error-form login__error-form--email">
+                    Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                  </div>
+                }
+              }
+            </div>
+            <div class="login__form-error">
+              <label class="login__card-form-field">
+                <mat-icon matPrefix class="login__icon material-symbols-outlined">lock</mat-icon>
+                <input
+                  class="login__input"
+                  matInput
+                  type="password"
+                  placeholder="Passwort"
+                  formControlName="password"
+                />
+              </label>
+              @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                @if (loginForm.get('password')?.errors?.['required']) {
+                  <div class="login__error-form">Bitte geben Sie Ihr Passwort ein.</div>
+                } @else if (loginForm.get('password')?.errors?.['minlength']) {
+                  <div class="login__error-form">
+                    Das Passwort muss mindestens 6 Zeichen lang sein.
+                  </div>
+                }
+              }
+            </div>
+            @if (errorMessage()) {
+              <div class="login__error-message">
+                {{ errorMessage() }}
+              </div>
+            }
+          </div>
           <button type="button" class="btn btn--link" routerLink="/send-email">
             Passwort vergessen?
           </button>

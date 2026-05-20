@@ -106,4 +106,37 @@
     gap: 30px;
     margin-top: auto;
   }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &__error-message {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    &--checkbox {
+      bottom: -10px;
+      left: 30px;
+    }
+  }
+
+  &__success {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444df2;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 1000;
+    animation: slideDown 0.5s ease;
+  }
 }

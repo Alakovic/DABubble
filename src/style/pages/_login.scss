@@ -127,8 +127,31 @@
     z-index: 1000;
     animation: slideDown 0.5s ease;
   }
-}
 
+  &__field, &__form-error {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  
+
+  &__error-message, &__error-form {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    &--checkbox {
+      bottom: -10px;
+      left: 30px;
+    }
+    &--email {
+      bottom: -3px;
+      left: 20px;
+    }
+  }
+}
 
 @keyframes slideDown {
   from {

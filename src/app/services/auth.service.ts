@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { registerDataInterface } from '../interfaces/user-interface';
-import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,sendPasswordResetEmail } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +25,9 @@ export class AuthService {
   googleLogin() {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(this.auth, provider);
+  }
+
+ resetPassword(email: string) {
+    return sendPasswordResetEmail(this.auth,email);
   }
 }

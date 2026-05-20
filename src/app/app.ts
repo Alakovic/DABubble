@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class App  {
   protected readonly title = signal('DABubble');
 
-  showIntro = signal(sessionStorage.getItem('hasSeenIntro') === null);
+  showIntro = signal(localStorage.getItem('hasSeenIntro') === null);
 
 
 
@@ -23,7 +23,7 @@ export class App  {
   ngOnInit() {
     if (this.showIntro()) {
       setTimeout(() => {
-        sessionStorage.setItem('hasSeenIntro', 'true');
+        localStorage.setItem('hasSeenIntro', 'true');
         this.showIntro.set(false);
       }, 3500);
     }

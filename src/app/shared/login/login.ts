@@ -38,6 +38,7 @@ export class Login {
   });
 
   async loginUser() {
+    if (this.isFormInvalid()) return;
     try {
       await this.authService.login(
         this.loginForm.value.email || '',
@@ -49,6 +50,16 @@ export class Login {
         this.errorMessage.set('E-Mail oder Passwort ist falsch');
       }
     }
+  }
+
+  isFormInvalid(): boolean {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+
+      return true;
+    }
+
+    return false;
   }
 
   showSuccessMessage() {

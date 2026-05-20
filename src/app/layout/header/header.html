@@ -2,7 +2,7 @@
   <div class="container">
     <div class="head">
       <img routerLink="" class="head__logo" src="/assets/img/logo/logo_w_text.svg" alt="logo" />
-      @if(router.url !== '/sign-in' && router.url !== '/send-email' && router.url !== '/select-avatar') {
+      @if(!hideHeaderRight()) {
       <div class="head__right">
         <p class="head__text">Neu bei DABubble?</p>
         <button class="btn btn--tertiary" routerLink="/sign-in">Konto erstellen</button>

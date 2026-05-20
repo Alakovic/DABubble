@@ -48,7 +48,7 @@ export class Avatar {
   }
 
   async registerUser(user: User) {
-    const response = await this.authService.register(user.email, user.password);
+    const response = await this.authService.register(user.email);
     user.id = response.user.uid;
     await this.userService.addUser(user);
   }

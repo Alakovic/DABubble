@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  authState,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -42,4 +43,5 @@ export class AuthService {
   changePassword(oobCode: string, newPassword: string) {
     return confirmPasswordReset(this.auth, oobCode, newPassword);
   }
+ 
 }

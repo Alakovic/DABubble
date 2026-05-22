@@ -1,0 +1,74 @@
+@use '../abstracts/variables' as v;
+
+.workspace {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  &__header-loggedUser {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__header-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  &__header-loggedUser-name {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  &__header-logo {
+    width: 200px;
+    height: 60px;
+  }
+
+  &__header-search {
+    flex: 1;
+    max-width: 700px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 20px;
+    border-radius: 30px;
+    background-color: v.$bg-white;
+    border: 1px solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid v.$text-gray;
+    }
+    &:focus-within {
+      border: 1px solid v.$text-gray;
+    }
+    &:focus-within .workspace__header-icon {
+      color: v.$text-black;
+    }
+  }
+
+  &__header-input {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: v.$text-black;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__header-icon {
+    color: v.$text-gray;
+    &:focus-within {
+      color: v.$text-black;
+    }
+  }
+}

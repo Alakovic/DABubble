@@ -3,17 +3,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../interfaces/user-interface';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-workspace',
-  imports: [MatIconModule],
+  imports: [MatIconModule, MatMenuModule],
   templateUrl: './workspace.html',
-  styleUrl: './workspace.scss',
+  styleUrls: ['./workspace.scss'] ,
 })
 export class Workspace {
   authService = inject(AuthService);
   userService = inject(UserService);
   loggedUser = signal<UserInterface | null>(null);
+  isMenuOpen = signal(false);
 
   async ngOnInit() {
     await this.userService.getAllUsers();

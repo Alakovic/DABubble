@@ -1,0 +1,114 @@
+@use '../abstracts/variables' as v;
+
+.user__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .user__icon-close {
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5px;
+    border: none !important;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 20px;
+}
+.user-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    font-size: 23px;
+    font-weight: 700;
+  }
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 20px;
+
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: gray;
+  }
+
+  &--online::before {
+    background-color: #92c83e;
+  }
+}
+
+.status-text {
+  font-size: 20px;
+  color: v.$text-gray;
+  &--online {
+    color: #92c83e;
+  }
+}
+
+.user-email{
+  display: flex;
+  flex-direction: column;
+  padding-block: 20px;
+  label {
+    font-size: 20px;
+  }
+ 
+}
+
+.user-email-header{
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 8px;
+  span {
+    font-size: 25px;
+  }
+  mat-icon {
+    font-size: 25px;
+   
+  }
+}
+
+.user-email-link{
+  font-size: 18px;
+  color: v.$text-blue-dark;
+  padding-left: 30px;
+}
+
+.mat-mdc-dialog-surface {
+  top: 100px;
+  padding: 20px;
+  width: 400px !important;
+  border-radius: 20px 0 20px 20px !important;
+}

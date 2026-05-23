@@ -41,6 +41,20 @@
     }
   }
 
+  &--edit{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: v.$text-blue-dark;
+    font-size: 18px;
+    padding: 10px 20px;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
   &--tertiary {
     background-color: v.$btn-tertiary;
     border: 1px solid transparent;

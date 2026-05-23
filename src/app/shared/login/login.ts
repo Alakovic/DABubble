@@ -44,6 +44,7 @@ export class Login {
         this.loginForm.value.email || '',
         this.loginForm.value.password || '',
       );
+      await this.setUserOnlineStatus();
       this.showSuccessMessage();
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
@@ -88,5 +89,11 @@ export class Login {
       email: response.user.email || '',
       avatar: response.user.photoURL || '',
     });
+  }
+
+  async setUserOnlineStatus() {
+    const firebaseUser = this.authService.auth.currentUser;
+    if (!firebaseUser) return;
+    await this.userService.updateUserStatus(firebaseUser.uid, 'online');
   }
 }

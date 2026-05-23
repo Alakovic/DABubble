@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { User } from '../models/user.class';
-import { Firestore, doc, setDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, getDocs, updateDoc } from '@angular/fire/firestore';
 import { UserInterface } from '../interfaces/user-interface';
 
 @Injectable({
@@ -23,5 +23,10 @@ export class UserService {
       ...doc.data(),
     }));
     this.allUsers.set(users as UserInterface[]);
+  }
+
+  updateUserStatus(id: string, status: string) {
+    const userRef = doc(this.firestore, 'users', id);
+    return updateDoc(userRef, { status });
   }
 }

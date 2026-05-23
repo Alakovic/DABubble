@@ -1,9 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../interfaces/user-interface';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { UserProfile } from '../user-profile/user-profile';
 
 @Component({
   selector: 'app-workspace',
@@ -16,6 +19,8 @@ export class Workspace {
   userService = inject(UserService);
   loggedUser = signal<UserInterface | null>(null);
   isMenuOpen = signal(false);
+  router = inject(Router);
+   dialog = inject(MatDialog);
 
   async ngOnInit() {
     await this.userService.getAllUsers();
@@ -26,5 +31,22 @@ export class Workspace {
     const firebaseUser = this.authService.auth.currentUser;
     const user = this.userService.allUsers().find((user) => user.email === firebaseUser?.email);
     this.loggedUser.set(user || null);
+  }
+
+  async logout() {
+    const firebaseUser = this.authService.auth.currentUser;
+    if(firebaseUser){
+      await this.userService.updateUserStatus(
+        firebaseUser.uid, 'offline'
+      );
+      await this.authService.logout();
+      this.router.navigate(['']);
+    }
+  }
+
+  goToProfile() {
+    this.dialog.open(UserProfile,{
+      data: this.loggedUser(),
+    })
   }
 }

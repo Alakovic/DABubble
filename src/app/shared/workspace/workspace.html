@@ -27,7 +27,9 @@
         [matMenuTriggerFor]="userMenu"
       >
         <span class="workspace__header-loggedUser-name">{{ loggedUser()?.name }}</span>
-        <img [src]="loggedUser()?.avatar" alt="Avatar" class="workspace__header-avatar" />
+        <div class="workspace__header-avatar-wrapper">
+          <img [src]="loggedUser()?.avatar" alt="Avatar" class="workspace__header-avatar" />
+        </div>
         <mat-icon
           matPrefix
           class="workspace__header-icon material-symbols-outlined"
@@ -35,8 +37,8 @@
           >keyboard_arrow_down</mat-icon
         >
         <mat-menu #userMenu="matMenu" class="workspace__header-menu">
-          <button mat-menu-item>Profile</button>
-          <button mat-menu-item>Log out</button>
+          <button mat-menu-item (click)="goToProfile()">Profile</button>
+          <button mat-menu-item (click)="logout()">Log out</button>
         </mat-menu>
       </label>
     </div>

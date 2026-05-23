@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   confirmPasswordReset,
+  signOut,
   authState,
 } from '@angular/fire/auth';
 
@@ -42,6 +43,10 @@ export class AuthService {
 
   changePassword(oobCode: string, newPassword: string) {
     return confirmPasswordReset(this.auth, oobCode, newPassword);
+  }
+
+  logout() {
+    return signOut(this.auth);
   }
  
 }

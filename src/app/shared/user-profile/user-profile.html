@@ -1,0 +1,24 @@
+<div class="user__header">
+  <h2>Profile</h2>
+  <button class="user__icon-close" mat-icon-button (click)="dialog.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="avatar-container">
+  <img class="user-avatar" [src]="user.avatar" alt="User Avatar" />
+</div>
+<div class="user-name">
+  <span>{{ user.name }}</span>
+  <button class="btn btn--edit">
+    <p>Bearbeiten</p>
+  </button>
+</div>
+<div class="status" [class.status--online]="user.status === 'online'">
+  <span class="status-text" [class.status-text--online]="user.status === 'online'">{{
+    user.status | titlecase
+  }}</span>
+</div>
+<div class="user-email">
+  <label class="user-email-header"> <mat-icon fontSet="material-symbols-outlined">mail</mat-icon><span>E-Mail-Adresse</span></label>
+  <span class="user-email-link">{{ user.email }}</span>
+</div>

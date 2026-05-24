@@ -7,10 +7,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserProfile } from '../user-profile/user-profile';
+import { Sidebar } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-workspace',
-  imports: [MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule],
+  imports: [MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule,Sidebar],
   templateUrl: './workspace.html',
   styleUrls: ['./workspace.scss'],
 })

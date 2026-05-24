@@ -1,0 +1,9 @@
+<div class="users">
+   <label class="users__label">
+      <button class="btn btn--toggle-channels" (click)="toggleUsers()">
+        <mat-icon> {{ usersOpen() ? 'arrow_drop_down' : 'arrow_drop_up' }} </mat-icon>
+      </button>
+      <mat-icon fontSet="material-symbols-outlined">account_circle</mat-icon>
+      <span class="users__title">Users</span>
+    </label>
+</div>

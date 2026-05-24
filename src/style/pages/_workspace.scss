@@ -112,10 +112,11 @@
   &__sidebar-left,
   &__sidebar-right,
   &__main {
-    border-radius: 15px;
+    border-radius: 25px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     background-color: v.$bg-white;
     min-height: calc(100vh - 130px);
+    padding: 25px;
   }
 
   &__sidebar-left {

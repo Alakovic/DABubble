@@ -68,7 +68,7 @@
     padding: 10px 20px;
   }
 
-  &--workspace-open{
+  &--workspace-open {
     left: -150px;
   }
 
@@ -122,6 +122,43 @@
       cursor: pointer;
     }
   }
+  &--add-channel {
+    background-color: transparent;
+    border: none;
+    color: v.$text-black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: auto;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--add-channel-bottom {
+    border-radius: 0;
+    background-color: transparent;
+    border: none;
+    &:hover {
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--toggle-channels{
+    border:none;
+    background-color: transparent;
+    padding: 0;
+    &:hover{
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
 
   &--back {
     background-color: transparent;
@@ -156,10 +193,23 @@
     &--workspace {
       font-size: 20px;
       transform: rotate(270deg);
-      transition: transform 0.2s ease;
+      transition: transform 0.5s ease-in-out;
     }
     &--workspace-open {
       transform: rotate(90deg);
+    }
+  }
+
+  &--new-message {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+    margin-left: auto;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
     }
   }
 }

@@ -1,0 +1,23 @@
+<div class="channels">
+  <div class="channels__header">
+    <label class="channels__label">
+      <button class="btn btn--toggle-channels" (click)="toggleChannels()">
+        <mat-icon> {{ channelsOpen() ? 'arrow_drop_down' : 'arrow_drop_up' }} </mat-icon>
+      </button>
+      <mat-icon fontSet="material-symbols-outlined">spoke</mat-icon>
+      <span class="channels__title">Channels</span>
+    </label>
+    <button class="btn btn--add-channel">
+      <mat-icon fontSet="material-symbols-outlined">add</mat-icon>
+    </button>
+  </div>
+  @if (channelsOpen()) {
+  <div class="channels__list">
+    <button class="channels__item"># general</button>
+  </div>
+  <button class="btn btn--add-channel-bottom">
+    <mat-icon fontSet="material-symbols-outlined">add_circle</mat-icon>
+    <span>Channel hinzufügen</span>
+  </button>
+    }
+</div>

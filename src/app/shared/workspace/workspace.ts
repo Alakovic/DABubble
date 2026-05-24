@@ -17,7 +17,7 @@ import { UserProfile } from '../user-profile/user-profile';
 export class Workspace {
   authService = inject(AuthService);
   userService = inject(UserService);
-  loggedUser = signal<UserInterface | null>(null);
+ 
   isMenuOpen = signal(false);
   router = inject(Router);
    dialog = inject(MatDialog);
@@ -30,7 +30,7 @@ export class Workspace {
   showLoggedUser() {
     const firebaseUser = this.authService.auth.currentUser;
     const user = this.userService.allUsers().find((user) => user.email === firebaseUser?.email);
-    this.loggedUser.set(user || null);
+    this.userService.loggedUser.set(user || null);
   }
 
   async logout() {
@@ -46,7 +46,7 @@ export class Workspace {
 
   goToProfile() {
     this.dialog.open(UserProfile,{
-      data: this.loggedUser(),
+      data: this.userService.loggedUser(),
     })
   }
 }

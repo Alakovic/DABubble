@@ -9,6 +9,7 @@ import { UserInterface } from '../interfaces/user-interface';
 export class UserService {
   firestore = inject(Firestore);
   allUsers = signal<UserInterface[]>([]);
+  loggedUser = signal<UserInterface | null>(null);
 
   addUser(user: User) {
     const usersRef = doc(this.firestore, 'users', user.id);
@@ -28,5 +29,10 @@ export class UserService {
   updateUserStatus(id: string, status: string) {
     const userRef = doc(this.firestore, 'users', id);
     return updateDoc(userRef, { status });
+  }
+
+  updateUser(id: string, name:string){
+    const userRef = doc(this.firestore, 'users', id);
+    return updateDoc(userRef, { name });
   }
 }

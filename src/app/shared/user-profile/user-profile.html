@@ -1,6 +1,6 @@
 <div class="user__header">
   <h2>Profile</h2>
-  <button class="user__icon-close" mat-icon-button (click)="dialog.close()">
+  <button class="user__icon-close" mat-icon-button (click)="dialogRef.close()">
     <mat-icon>close</mat-icon>
   </button>
 </div>
@@ -9,7 +9,7 @@
 </div>
 <div class="user-name">
   <span>{{ user.name }}</span>
-  <button class="btn btn--edit">
+  <button class="btn btn--edit" (click)="editDialog()">
     <p>Bearbeiten</p>
   </button>
 </div>

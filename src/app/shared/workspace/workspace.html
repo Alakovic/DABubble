@@ -26,9 +26,9 @@
         (menuClosed)="isMenuOpen.set(false)"
         [matMenuTriggerFor]="userMenu"
       >
-        <span class="workspace__header-loggedUser-name">{{ loggedUser()?.name }}</span>
+        <span class="workspace__header-loggedUser-name">{{ userService.loggedUser()?.name }}</span>
         <div class="workspace__header-avatar-wrapper">
-          <img [src]="loggedUser()?.avatar" alt="Avatar" class="workspace__header-avatar" />
+          <img [src]="userService.loggedUser()?.avatar" alt="Avatar" class="workspace__header-avatar" />
         </div>
         <mat-icon
           matPrefix

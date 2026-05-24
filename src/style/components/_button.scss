@@ -22,7 +22,7 @@
       cursor: pointer;
     }
     &:disabled {
-      background-color:v.$btn-primary-disabled;
+      background-color: v.$btn-primary-disabled;
       cursor: not-allowed;
       opacity: 0.7;
     }
@@ -41,7 +41,38 @@
     }
   }
 
-  &--edit{
+  &--workspace {
+    border-radius: 10px 10px 0 0;
+    outline: none;
+    border: none;
+    padding: 10px 20px;
+    background-color: v.$bg-white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    &:hover {
+      color: v.$text-blue-dark;
+      cursor: pointer;
+
+      .btn__text--workspace {
+        color: v.$text-blue-dark;
+      }
+    }
+
+    position: absolute;
+    left: -130px;
+    bottom: 40%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: rotate(90deg);
+    padding: 10px 20px;
+  }
+
+  &--workspace-open{
+    left: -150px;
+  }
+
+  &--edit {
     outline: none;
     background-color: transparent;
     border: none;
@@ -110,6 +141,25 @@
       background-color: v.$bg-gray;
       color: v.$text-blue;
       cursor: pointer;
+    }
+  }
+  &__text {
+    &--workspace {
+      color: v.$text-black;
+      transform: rotate(180deg);
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  &__icon {
+    &--workspace {
+      font-size: 20px;
+      transform: rotate(270deg);
+      transition: transform 0.2s ease;
+    }
+    &--workspace-open {
+      transform: rotate(90deg);
     }
   }
 }

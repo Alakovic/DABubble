@@ -100,6 +100,45 @@
     background-color: rgba(0, 0, 0, 0.15);
     z-index: 1;
   }
+
+  &__content {
+    display: flex;
+    width: 100%;
+    padding-inline: 20px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  &__sidebar-left,
+  &__sidebar-right,
+  &__main {
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: v.$bg-white;
+    min-height: calc(100vh - 130px);
+  }
+
+  &__sidebar-left {
+    transition: width 0.2s ease;
+    margin-right: 15px;
+    &--closed {
+      width: 0;
+      min-width: 0;
+      padding: 0;
+      margin-right: 0;
+      overflow: hidden;
+    }
+    &--open {
+      width: 300px;
+    }
+  }
+  &__main {
+    flex: 1;
+  }
+  &__sidebar-right {
+    width: 350px;
+    margin-left: 15px;
+  }
 }
 
 .cdk-overlay-pane {

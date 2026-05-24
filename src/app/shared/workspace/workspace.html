@@ -25,10 +25,15 @@
         (menuOpened)="isMenuOpen.set(true)"
         (menuClosed)="isMenuOpen.set(false)"
         [matMenuTriggerFor]="userMenu"
+        type="button"
       >
         <span class="workspace__header-loggedUser-name">{{ userService.loggedUser()?.name }}</span>
         <div class="workspace__header-avatar-wrapper">
-          <img [src]="userService.loggedUser()?.avatar" alt="Avatar" class="workspace__header-avatar" />
+          <img
+            [src]="userService.loggedUser()?.avatar"
+            alt="Avatar"
+            class="workspace__header-avatar"
+          />
         </div>
         <mat-icon
           matPrefix
@@ -41,6 +46,38 @@
           <button mat-menu-item (click)="logout()">Log out</button>
         </mat-menu>
       </label>
+    </div>
+    <div class="workspace__content">
+      <button
+        type="button"
+        (click)="toggleSidebar()"
+        class="btn btn--workspace"
+        [class.btn--workspace-open]="sidebarOpen()"
+      >
+        <mat-icon
+          fontSet="material-symbols-outlined"
+          class="btn__icon btn__icon--workspace"
+          [class.btn__icon--workspace-open]="sidebarOpen()"
+          >left_panel_open</mat-icon
+        >
+        <p class="btn__text btn__text--workspace">
+          {{ sidebarOpen() ? 'Workspace-Menu schliessen' : 'Workspace-Menu öffnen' }}
+        </p>
+      </button>
+      <!-- LEFT -->
+      <aside
+        class="workspace__sidebar-left"
+        [class.workspace__sidebar-left--open]="sidebarOpen()"
+        [class.workspace__sidebar-left--closed]="!sidebarOpen()"
+      >
+        Sidebar
+      </aside>
+      <!-- MAIN -->
+      <main class="workspace__main">Chat</main>
+      <!-- RIGHT -->
+      @if (threadOpen()) {
+        <aside class="workspace__sidebar-right">Thread</aside>
+      }
     </div>
   </div>
 </section>

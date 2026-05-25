@@ -17,4 +17,30 @@
     font-size: 18px;
     font-weight: 500;
   }
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__avatar-wrapper {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #92c83e;
+      border: 1px solid white;
+    }
+    &--offline::after {
+      background-color: gray;
+    }
+  }
+
+  &__sufix{
+    margin-left: 5px;
+  }
 }

@@ -1,0 +1,10 @@
+@if (isWelcome) {
+  <div class="chat__content chat__content--welcome">
+    <h1 class="chat__title chat__title--welcome">Willkommen bei Devspace</h1>
+    <p class="chat__welcome-message">
+      Schön, dass du da bist,
+      <span>{{ loggedUser?.name }}</span> 👋
+    </p>
+    <p class="chat__welcome-message">Wähle einen Channel oder starte eine Direktnachricht.</p>
+  </div>
+}

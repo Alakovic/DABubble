@@ -73,9 +73,9 @@
         <app-sidebar></app-sidebar>
       </aside>
       <!-- MAIN -->
-      <main class="workspace__main"> <router-outlet></router-outlet></main>
+      <main class="workspace__main"> <div class="chat"> <router-outlet></router-outlet></div></main>
       <!-- RIGHT -->
-      @if (threadOpen()) {
+      @if (!threadOpen()) {
         <aside class="workspace__sidebar-right">Thread</aside>
       }
     </div>

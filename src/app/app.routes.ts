@@ -5,6 +5,7 @@ import { SendEmail } from './shared/send-email/send-email';
 import { Avatar } from './shared/avatar/avatar';
 import { Workspace } from './shared/workspace/workspace';
 import { NewPassword } from './shared/new-password/new-password';
+import { WelcomeScreen } from './shared/welcome-screen/welcome-screen';
 
 export const routes: Routes = [
     {
@@ -25,7 +26,13 @@ export const routes: Routes = [
     },
     {
         path: 'workspace',
-        component: Workspace
+        component: Workspace,
+        children: [
+            { 
+                path: '',
+                component: WelcomeScreen,
+            }
+        ] 
     },
     {
         path: 'new-password',

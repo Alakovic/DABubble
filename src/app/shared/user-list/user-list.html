@@ -9,14 +9,16 @@
   @if(usersOpen()){
   <div class="users__list">
     @for (user of userService.allUsers(); track user.id) {
-      <button class="btn btn--user">
+      <button class="btn btn--user" (click)="startChat(user)">
         <div class="users__avatar-wrapper"   [class.users__avatar-wrapper--offline]="user.status !== 'online'">
         <img class="btn__icon btn__icon--user" [src]="user.avatar" alt="{{ user.name }}" />
         </div>
-        {{ user.name }}
-        @if (user.email === userService.loggedUser()?.email) {
-          <span class="users__sufix">(Du)</span>
-        }
+        <div class="btn__text btn__text--user">
+          {{ user.name }}
+          @if (user.email === userService.loggedUser()?.email) {
+            <span class="users__sufix">(Du)</span>
+          }
+        </div>
       </button>
     }
   </div>

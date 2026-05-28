@@ -1,13 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { UserInterface } from '../../../interfaces/user-interface';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../../../services/user.service';
+import { UserProfile } from '../../../shared/user-profile/user-profile';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat-header',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './chat-header.html',
   styleUrls: ['./chat-header.scss'],
 })
 export class ChatHeader {
-  @Input() loggedUser  : UserInterface | null = null;
- @Input() isWelcome = false;
+  userService = inject(UserService);
+  dialog = inject(MatDialog);
+  @Input() user: UserInterface | null = null;
+
+  goToProfile() {
+    this.dialog.open(UserProfile, {
+      data: this.user
+    });
+  }
 }

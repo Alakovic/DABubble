@@ -11,7 +11,7 @@ import { Sidebar } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-workspace',
-  imports: [RouterOutlet, MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule,Sidebar],
+  imports: [RouterOutlet, MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule, Sidebar],
   templateUrl: './workspace.html',
   styleUrls: ['./workspace.scss'],
 })
@@ -46,7 +46,7 @@ export class Workspace {
 
   goToProfile() {
     this.dialog.open(UserProfile, {
-      data: this.userService.loggedUser(),
+      data: this.userService.loggedUser()
     });
   }
 

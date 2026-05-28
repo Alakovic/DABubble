@@ -1,8 +1,19 @@
 <div class="chat__header">
   <div class="chat__header-left">
-    @if (isWelcome) {
-      Hello, {{ loggedUser?.name }}
-    }
+    <button class="btn btn--user" (click)="goToProfile()">
+      <div
+        class="users__avatar-wrapper"
+        [class.users__avatar-wrapper--offline]="user?.status !== 'online'"
+      >
+        <img class="btn__icon btn__icon--user" [src]="user?.avatar" alt="{{ user?.name }}" />
+      </div>
+      <div class="btn__text btn__text--user">
+        {{ user?.name }}
+      </div>
+      @if (user?.email === userService.loggedUser()?.email) {
+        <span class="users__sufix">(Du)</span>
+      }
+    </button>
   </div>
   <div class="chat__header-right"></div>
 </div>

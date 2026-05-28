@@ -73,7 +73,8 @@
         <app-sidebar></app-sidebar>
       </aside>
       <!-- MAIN -->
-      <main class="workspace__main"> <div class="chat"> <router-outlet></router-outlet></div></main>
+       @if(userService.loggedUser()) {
+      <main class="workspace__main"> <div class="chat"> <router-outlet></router-outlet></div></main>}
       <!-- RIGHT -->
       @if (!threadOpen()) {
         <aside class="workspace__sidebar-right">Thread</aside>

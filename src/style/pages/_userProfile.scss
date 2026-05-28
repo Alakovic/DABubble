@@ -76,17 +76,16 @@
   }
 }
 
-.user-email{
+.user-email {
   display: flex;
   flex-direction: column;
   padding-block: 20px;
   label {
     font-size: 20px;
   }
- 
 }
 
-.user-email-header{
+.user-email-header {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
@@ -96,19 +95,20 @@
   }
   mat-icon {
     font-size: 25px;
-   
   }
 }
 
-.user-email-link{
+.user-email-link {
   font-size: 18px;
   color: v.$text-blue-dark;
   padding-left: 30px;
 }
 
 .mat-mdc-dialog-surface {
-  top: 100px;
+  top: 80px;
   padding: 20px;
   width: 400px !important;
   border-radius: 20px 0 20px 20px !important;
 }
+
+

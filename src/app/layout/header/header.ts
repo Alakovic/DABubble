@@ -21,7 +21,7 @@ export class Header {
 
   hideHeader(): boolean {
     return (
-      this.router.url === '/workspace' 
+      this.router.url.startsWith('/workspace') 
     )
   }
 }

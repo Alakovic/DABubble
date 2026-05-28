@@ -9,9 +9,11 @@
 </div>
 <div class="user-name">
   <span>{{ user.name }}</span>
-  <button class="btn btn--edit" (click)="editDialog()">
-    <p>Bearbeiten</p>
-  </button>
+  @if (user.email === userService.loggedUser()?.email) {
+    <button class="btn btn--edit" (click)="editDialog()">
+      <p>Bearbeiten</p>
+    </button>
+  }
 </div>
 <div class="status" [class.status--online]="user.status === 'online'">
   <span class="status-text" [class.status-text--online]="user.status === 'online'">{{
@@ -19,6 +21,8 @@
   }}</span>
 </div>
 <div class="user-email">
-  <label class="user-email-header"> <mat-icon fontSet="material-symbols-outlined">mail</mat-icon><span>E-Mail-Adresse</span></label>
+  <label class="user-email-header">
+    <mat-icon fontSet="material-symbols-outlined">mail</mat-icon><span>E-Mail-Adresse</span></label
+  >
   <span class="user-email-link">{{ user.email }}</span>
 </div>

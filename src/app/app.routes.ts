@@ -6,6 +6,7 @@ import { Avatar } from './shared/avatar/avatar';
 import { Workspace } from './shared/workspace/workspace';
 import { NewPassword } from './shared/new-password/new-password';
 import { WelcomeScreen } from './shared/welcome-screen/welcome-screen';
+import { DirectMessage } from './shared/direct-message/direct-message';
 
 export const routes: Routes = [
     {
@@ -31,6 +32,10 @@ export const routes: Routes = [
             { 
                 path: '',
                 component: WelcomeScreen,
+            },
+            {
+                path: 'chat/:id',
+                component: DirectMessage
             }
         ] 
     },

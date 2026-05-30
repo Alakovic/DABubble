@@ -4,11 +4,10 @@ import { UserService } from '../../services/user.service';
 import { UserInterface } from '../../interfaces/user-interface';
 import { ChatService } from '../../services/chat.service';
 import { Router } from '@angular/router';
-import { CdkAutofill } from "@angular/cdk/text-field";
 
 @Component({
   selector: 'app-user-list',
-  imports: [MatIconModule, CdkAutofill],
+  imports: [MatIconModule],
   templateUrl: './user-list.html',
   styleUrls: ['./user-list.scss'] ,
 })

@@ -7,4 +7,28 @@
     </p>
     <p class="chat__welcome-message">Wähle einen Channel oder starte eine Direktnachricht.</p>
   </div>
+} @else {
+  @if (messages.length === 0) {
+    <div class="chat__content">
+      <button class="btn btn--user-content" (click)="goToProfile()">
+        <div
+          class="users__avatar-wrapper-content"
+          [class.users__avatar-wrapper-content--offline]="user?.status !== 'online'"
+        >
+          <img class="btn__icon btn__icon--user-content" [src]="user?.avatar" alt="{{ user?.name }}" />
+        </div>
+        <div class="btn__text btn__text--user-content">
+          {{ user?.name }}
+        </div>
+        @if (user?.email === userService.loggedUser()?.email) {
+          <span class="users__sufix users__sufix--user-content">(Du)</span>
+        }
+      </button>
+       <!-- Hier werden die klein text unter dem Benutzernamen angezeigt -->
+    </div>
+  } @else {
+    <div class="chat__content">
+      <!-- Hier werden die Nachrichten angezeigt -->
+    </div>
+  }
 }

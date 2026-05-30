@@ -14,6 +14,14 @@
     &--user {
       margin-left: 10px;
     }
+
+    &--user-content {
+      color: v.$text-black;
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 10px;
+      align-self: flex-end;
+    }
   }
 
   &--primary {
@@ -203,6 +211,14 @@
       object-fit: cover;
       display: block;
     }
+
+    &--user-content {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
     &--workspace {
       font-size: 20px;
       transform: rotate(270deg);
@@ -241,6 +257,29 @@
       background-color: v.$bg-gray;
       color: v.$text-blue-dark;
       cursor: pointer;
+    }
+  }
+
+  &--user-content {
+    background-color: transparent;
+    border: none;
+    color: v.$text-black;
+    font-size: 18px;
+    padding: 5px 10px;
+    text-align: left;
+    align-self: flex-start;
+    gap: 0;
+    display: flex;
+    align-items: center;
+    &:hover {
+      color: v.$text-blue-dark;
+      cursor: pointer;
+      .btn__text--user-content {
+        color: v.$text-blue-dark;
+      }
+      .users__sufix--user-content {
+        color: v.$text-blue-dark;
+      }
     }
   }
 }

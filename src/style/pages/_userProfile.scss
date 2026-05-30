@@ -104,11 +104,11 @@
   padding-left: 30px;
 }
 
-.mat-mdc-dialog-surface {
-  top: 80px;
-  padding: 20px;
-  width: 400px !important;
-  border-radius: 20px 0 20px 20px !important;
+.chat-centered-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 

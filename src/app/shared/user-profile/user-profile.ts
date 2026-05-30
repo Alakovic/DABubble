@@ -1,5 +1,5 @@
-import { Component, inject} from '@angular/core';
-import {  MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -17,22 +17,36 @@ import { EditUser } from '../edit-user/edit-user';
     MatInputModule,
     MatNativeDateModule,
     FormsModule,
-    CommonModule,MatIconModule,TitleCasePipe
+    CommonModule,
+    MatIconModule,
+    TitleCasePipe,
   ],
   templateUrl: './user-profile.html',
   styleUrls: ['./user-profile.scss'],
 })
 export class UserProfile {
-  dialog =inject(MatDialog);
+  dialog = inject(MatDialog);
   dialogRef = inject(MatDialogRef<UserProfile>);
   data = inject(MAT_DIALOG_DATA);
-  user = new User(this.data);
+  user = new User(this.data.user);
   userService = inject(UserService);
 
   editDialog() {
-    this.dialogRef.close(UserProfile);
-    this.dialog.open(EditUser, {
-      data: this.userService.loggedUser(),
-    })
+    this.dialogRef.close();
+    if (this.data.source === 'workspace') {
+      this.dialog.open(EditUser, {
+        data: this.userService.loggedUser(),
+        panelClass: 'profile-dialog-corner',
+        position: {
+          top: '100px',
+          right: '20px',
+        },
+      });
+    } else {
+      this.dialog.open(EditUser, {
+        data: this.userService.loggedUser(),
+        panelClass: 'profile-dialog-centered',
+      });
+    }
   }
 }

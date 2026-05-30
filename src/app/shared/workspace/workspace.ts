@@ -46,7 +46,12 @@ export class Workspace {
 
   goToProfile() {
     this.dialog.open(UserProfile, {
-      data: this.userService.loggedUser()
+      data: { user: this.userService.loggedUser(), source: 'workspace' },
+      panelClass: 'profile-dialog-corner',
+      position: {
+        top: '100px',
+        right: '20px',
+      },
     });
   }
 

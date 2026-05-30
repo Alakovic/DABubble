@@ -18,7 +18,8 @@ export class ChatHeader {
 
   goToProfile() {
     this.dialog.open(UserProfile, {
-      data: this.user
+      data: { user: this.user, source: 'chat' },
+      panelClass: 'profile-dialog-centered',
     });
   }
 }

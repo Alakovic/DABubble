@@ -1,16 +1,15 @@
 import { Component, inject } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
-
-import { ChatInterface } from '../../interfaces/chat-interface';
 import { CommonModule } from '@angular/common';
 import { ChatHeader } from '../../layout/chat/chat-header/chat-header';
 import { UserService } from '../../services/user.service';
+import { ChatInput } from '../../layout/chat/chat-input/chat-input';
+import { ChatContent } from '../../layout/chat/chat-content/chat-content';
 
 @Component({
   selector: 'app-direct-message',
-  imports: [CommonModule, ChatHeader],
+  imports: [CommonModule, ChatHeader, ChatContent, ChatInput],
   templateUrl: './direct-message.html',
   styleUrls: ['./direct-message.scss'],
 })

@@ -7,15 +7,19 @@
     </p>
     <p class="chat__welcome-message">Wähle einen Channel oder starte eine Direktnachricht.</p>
   </div>
-} @else {
+} @else if (isDirectChat) {
   @if (messages.length === 0) {
-    <div class="chat__content">
+    <div class="chat__content chat__content--no-messages">
       <button class="btn btn--user-content" (click)="goToProfile()">
         <div
           class="users__avatar-wrapper-content"
           [class.users__avatar-wrapper-content--offline]="user?.status !== 'online'"
         >
-          <img class="btn__icon btn__icon--user-content" [src]="user?.avatar" alt="{{ user?.name }}" />
+          <img
+            class="btn__icon btn__icon--user-content"
+            [src]="user?.avatar"
+            alt="{{ user?.name }}"
+          />
         </div>
         <div class="btn__text btn__text--user-content">
           {{ user?.name }}
@@ -24,7 +28,17 @@
           <span class="users__sufix users__sufix--user-content">(Du)</span>
         }
       </button>
-       <!-- Hier werden die klein text unter dem Benutzernamen angezeigt -->
+      @if (user?.email === userService.loggedUser()?.email) {
+        <span class="chat__info"
+          ><span class="chat__info-highlight">Dieser Raum ist nur für dich da.</span> Mache dir
+          Notizen, liste deine To-dos oder bewahre Links und Dateien griffbereit auf. Du kannst hier
+          auch gerne Dinge mit dir selbst besprechen.</span
+        >
+      } @else {
+        <span class="chat__info">
+          Diese Unterhaltung findet nur zwischen <span  (click)="goToProfile()" class="chat__info-highlight chat__info-highlight--user">@{{ user?.name }}</span> und dir statt.
+        </span>
+      }
     </div>
   } @else {
     <div class="chat__content">

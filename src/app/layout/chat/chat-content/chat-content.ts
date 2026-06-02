@@ -14,6 +14,7 @@ export class ChatContent {
   @Input() loggedUser: UserInterface | null = null;
   @Input() isWelcome = false;
   @Input() user: UserInterface | null = null;
+  @Input() isDirectChat = false;
   userService = inject(UserService);
   dialog = inject(MatDialog);
   messages = [];

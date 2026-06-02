@@ -15,6 +15,7 @@ export class ChatHeader {
   userService = inject(UserService);
   dialog = inject(MatDialog);
   @Input() user: UserInterface | null = null;
+  @Input() isDirectChat = false;
 
   goToProfile() {
     this.dialog.open(UserProfile, {

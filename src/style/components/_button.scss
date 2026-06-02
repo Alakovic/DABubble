@@ -212,6 +212,11 @@
       display: block;
     }
 
+    &--emoji {
+      width: 20px;
+      height: 20px;
+    }
+
     &--user-content {
       width: 60px;
       height: 60px;
@@ -295,14 +300,24 @@
     }
   }
 
-  &--send{
-    background-color:transparent;
-    border:none;
-    color:v.$text-blue-dark;
+  &--send {
+    background-color: transparent;
+    border: none;
+    color: v.$text-blue-dark;
     margin-left: auto;
     &:hover {
       color: v.$text-blue;
       cursor: pointer;
+    }
+  }
+
+  &--emoji {
+    border: none;
+    background: transparent;
+    padding: 5px;
+    &:hover{
+        background-color: v.$bg-gray;
+        cursor: pointer;
     }
   }
 }

@@ -9,6 +9,7 @@ import { ChatContent } from '../../layout/chat/chat-content/chat-content';
 
 @Component({
   selector: 'app-direct-message',
+  standalone: true,
   imports: [CommonModule, ChatHeader, ChatContent, ChatInput],
   templateUrl: './direct-message.html',
   styleUrls: ['./direct-message.scss'],

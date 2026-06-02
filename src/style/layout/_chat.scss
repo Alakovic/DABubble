@@ -98,6 +98,7 @@
     border: 1px solid #adb0d9;
     border-radius: 15px;
     padding: 15px;
+    position: relative;
     &:focus-within {
       border-color: v.$text-blue-dark;
     }
@@ -118,5 +119,29 @@
     resize: none;
     font-size: 18px;
     background: transparent;
+  }
+
+  &__mention-list,
+  &__emoji-list {
+    position: absolute;
+    bottom: 45px;
+    background: v.$bg-white;
+    padding: 20px 10px;
+    border: 1px solid #adb0d9;
+    border-radius: 15px 15px 15px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  &__mention-list {
+    left: 65px;
+    width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  &__emoji-list {
+    left: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 }

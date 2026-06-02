@@ -282,4 +282,27 @@
       }
     }
   }
+
+  &--action {
+    background-color: transparent;
+    border: none;
+    color: v.$text-gray;
+    padding: 5px;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--send{
+    background-color:transparent;
+    border:none;
+    color:v.$text-blue-dark;
+    margin-left: auto;
+    &:hover {
+      color: v.$text-blue;
+      cursor: pointer;
+    }
+  }
 }

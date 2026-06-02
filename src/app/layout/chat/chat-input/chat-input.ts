@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-chat-input',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './chat-input.html',
-  styleUrl: './chat-input.scss',
+  styleUrls: ['./chat-input.scss'],
 })
 export class ChatInput {}
+  

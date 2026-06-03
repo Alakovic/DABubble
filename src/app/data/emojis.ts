@@ -1,0 +1,16 @@
+export const EMOJIS = [
+  'excellence',
+  'face-savoring-food',
+  'head-bandage',
+  'laugh',
+  'love',
+  'mark',
+  'nerd',
+  'party-popper',
+  'rocket',
+  'smiling-eyes',
+  'smiling-face-with-sunglasses',
+  'star-struck',
+  'without-mouth',
+  'zany-face',
+];

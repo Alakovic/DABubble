@@ -2,35 +2,31 @@ import { Component, Input, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { UserInterface } from '../../../interfaces/user-interface';
 import { UserService } from '../../../services/user.service';
+import { ChatService } from '../../../services/chat.service';
+import { MessagesService } from '../../../services/messages.service';
+import { FormsModule } from '@angular/forms';
+import { EMOJIS } from '../../../data/emojis';
+import { Message } from '../../../models/message.class';
 
 @Component({
   selector: 'app-chat-input',
-  imports: [MatIconModule],
+  imports: [MatIconModule, FormsModule],
   templateUrl: './chat-input.html',
-  styleUrls: ['./chat-input.scss']
+  styleUrls: ['./chat-input.scss'],
 })
 export class ChatInput {
   @Input() user: UserInterface | null = null;
   userService = inject(UserService);
+  chatService = inject(ChatService);
+  messageService = inject(MessagesService);
   showList = signal(false);
   showEmojis = signal(false);
+  messageText = '';
 
-  emojis = [
-    'assets/img/emojis/excellence.png',
-    'assets/img/emojis/face-savoring-food.png',
-    'assets/img/emojis/head-bandage.png',
-    'assets/img/emojis/laugh.png',
-    'assets/img/emojis/love.png',
-    'assets/img/emojis/mark.png',
-    'assets/img/emojis/nerd.png',
-    'assets/img/emojis/party-popper.png',
-    'assets/img/emojis/rocket.png',
-    'assets/img/emojis/smiling-eyes.png',
-    'assets/img/emojis/smiling-face-with-sunglasses.png',
-    'assets/img/emojis/star-struck.png',
-    'assets/img/emojis/without-mouth.png',
-    'assets/img/emojis/zany-face.png'
-  ]
+  emojis = EMOJIS.map((name) => ({
+    icon: `assets/img/emojis/${name}.png`,
+    value: `:${name}:`,
+  }));
 
   toggleUserList() {
     this.showList.update((show) => !show);
@@ -40,5 +36,34 @@ export class ChatInput {
     this.showEmojis.update((show) => !show);
   }
 
- 
+  addEmoji(emoji: string) {
+    this.messageText += emoji;
+    this.showEmojis.set(false);
+  }
+
+  mentionUser(user: UserInterface) {
+    this.messageText += `@${user.name} `;
+    this.messageService.mentions.update((mentions) => [
+      ...mentions,
+      { id: user.id, name: user.name },
+    ]);
+    this.showList.set(false);
+  }
+
+  async sendMessage() {
+    const loggedUser = this.userService.loggedUser();
+    if (!loggedUser) return;
+    if (!this.messageText.trim()) return;
+
+    const message = new Message({
+      senderId: loggedUser.id,
+      text: this.messageText,
+      createdAt: Date.now(),
+      mentions: this.messageService.mentions(),
+    });
+
+    await this.messageService.sendMessage(this.chatService.activeChatId(), message);
+    this.messageText = '';
+    this.messageService.mentions.set([]);
+  }
 }

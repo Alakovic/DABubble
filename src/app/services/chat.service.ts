@@ -1,6 +1,5 @@
 import { Injectable,inject,signal } from '@angular/core';
 import { Firestore, doc, setDoc, docData } from '@angular/fire/firestore';
-import { ChatInterface } from '../interfaces/chat-interface';
 import { Chat } from '../models/chat.class';
 
 @Injectable({

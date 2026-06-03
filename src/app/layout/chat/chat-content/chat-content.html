@@ -8,7 +8,7 @@
     <p class="chat__welcome-message">Wähle einen Channel oder starte eine Direktnachricht.</p>
   </div>
 } @else if (isDirectChat) {
-  @if (messages.length === 0) {
+  @if (messagesService.messages().length === 0) {
     <div class="chat__content chat__content--no-messages">
       <button class="btn btn--user-content" (click)="goToProfile()">
         <div
@@ -36,13 +36,19 @@
         >
       } @else {
         <span class="chat__info">
-          Diese Unterhaltung findet nur zwischen <span  (click)="goToProfile()" class="chat__info-highlight chat__info-highlight--user">@{{ user?.name }}</span> und dir statt.
+          Diese Unterhaltung findet nur zwischen
+          <span (click)="goToProfile()" class="chat__info-highlight chat__info-highlight--user"
+            >@{{ user?.name }}</span
+          >
+          und dir statt.
         </span>
       }
     </div>
   } @else {
     <div class="chat__content">
-      <!-- Hier werden die Nachrichten angezeigt -->
+      @for (message of messagesService.messages(); track message.id) {
+        <div class="chat__message" [innerHTML]="parseMessage(message)"></div>
+      }
     </div>
   }
 }

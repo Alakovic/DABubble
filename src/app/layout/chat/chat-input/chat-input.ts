@@ -50,7 +50,7 @@ export class ChatInput {
     this.showList.set(false);
   }
 
-  async sendMessage() {
+ sendMessage() {
     const loggedUser = this.userService.loggedUser();
     if (!loggedUser) return;
     if (!this.messageText.trim()) return;
@@ -62,7 +62,7 @@ export class ChatInput {
       mentions: this.messageService.mentions(),
     });
 
-    await this.messageService.sendMessage(this.chatService.activeChatId(), message);
+    this.messageService.sendMessage(this.chatService.activeChatId(), message);
     this.messageText = '';
     this.messageService.mentions.set([]);
   }

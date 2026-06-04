@@ -300,6 +300,18 @@
     }
   }
 
+  &--chat-action {
+    background-color: transparent;
+    border: none;
+    color: v.$text-black;
+    padding: 5px;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
   &--send {
     background-color: transparent;
     border: none;
@@ -315,9 +327,9 @@
     border: none;
     background: transparent;
     padding: 5px;
-    &:hover{
-        background-color: v.$bg-gray;
-        cursor: pointer;
+    &:hover {
+      background-color: v.$bg-gray;
+      cursor: pointer;
     }
   }
 }

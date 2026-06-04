@@ -46,8 +46,15 @@
     </div>
   } @else {
     <div class="chat__content">
-      @for (message of messagesService.messages(); track message.id) {
-        <div class="chat__message" [innerHTML]="parseMessage(message)"></div>
+      @for (message of messagesService.messages(); track message.id; let i = $index) {
+        @if (shouldShowDateSeparator(i)) {
+          <div class="chat__separator">
+            <span class="chat__separator-text">
+              {{ message.createdAt | date: 'EEEE, d. MMMM' }}
+            </span>
+          </div>
+        }
+        <app-chat-message [message]="message"></app-chat-message>
       }
     </div>
   }

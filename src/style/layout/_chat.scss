@@ -31,7 +31,6 @@
     flex: 1;
     overflow-y: auto;
     padding: 25px;
-    flex: 1;
     display: flex;
     flex-direction: column;
     &--welcome {
@@ -143,5 +142,28 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
+  }
+
+  &__separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 15px;
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: #adb0d9;
+    }
+  }
+
+  &__separator-text {
+    border: 1px solid #adb0d9;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background: white;
+    white-space: nowrap;
   }
 }

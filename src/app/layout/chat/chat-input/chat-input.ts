@@ -37,12 +37,12 @@ export class ChatInput {
   }
 
   addEmoji(emoji: string) {
-    this.messageText += emoji;
+    this.messageText +=  ` ${emoji}`;
     this.showEmojis.set(false);
   }
 
   mentionUser(user: UserInterface) {
-    this.messageText += `@${user.name} `;
+    this.messageText += ` @${user.name}`;
     this.messageService.mentions.update((mentions) => [
       ...mentions,
       { id: user.id, name: user.name },
@@ -54,14 +54,12 @@ export class ChatInput {
     const loggedUser = this.userService.loggedUser();
     if (!loggedUser) return;
     if (!this.messageText.trim()) return;
-
     const message = new Message({
       senderId: loggedUser.id,
       text: this.messageText,
       createdAt: Date.now(),
       mentions: this.messageService.mentions(),
     });
-
     this.messageService.sendMessage(this.chatService.activeChatId(), message);
     this.messageText = '';
     this.messageService.mentions.set([]);

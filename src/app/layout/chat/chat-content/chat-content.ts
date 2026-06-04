@@ -5,10 +5,12 @@ import { UserProfile } from '../../../shared/user-profile/user-profile';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagesService } from '../../../services/messages.service';
 import { MessageInterface } from '../../../interfaces/message-interface';
+import { ChatMessage } from '../chat-message/chat-message';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-chat-content',
-  imports: [],
+  imports: [ChatMessage, DatePipe, CommonModule],
   templateUrl: './chat-content.html',
   styleUrls: ['./chat-content.scss'],
 })
@@ -28,18 +30,17 @@ export class ChatContent {
     });
   }
 
-  parseMessage(message: MessageInterface): string {
-    let text = message.text;
-    message.mentions.forEach((mention) => {
-      text = text.replace(
-        `@${mention.name}`,
-        `<span class="chat__mention">${mention.name}</span>`,
-      );
-    });
-    text = text.replace(
-      /:([a-z-]+):/g,
-      (_, name) => `<img src="assets/img/emojis/${name}.png" class="chat__emoji-inline">`,
+  shouldShowDateSeparator(index: number): boolean {
+    const messages = this.messagesService.messages();
+    if (index === 0) {
+      return true;
+    }
+    const current = new Date(messages[index].createdAt);
+    const previous = new Date(messages[index - 1].createdAt);
+    return (
+      current.getDate() !== previous.getDate() ||
+      current.getMonth() !== previous.getMonth() ||
+      current.getFullYear() !== previous.getFullYear()
     );
-    return text;
   }
 }

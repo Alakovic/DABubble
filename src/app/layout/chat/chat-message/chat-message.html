@@ -1,0 +1,23 @@
+<div class="message" [class.message--own]="isOwnMessage()">
+  <div class="message__avatar-wrapper">
+    <img class="message__avatar" [src]="getSender()?.avatar" alt="{{ getSender()?.name }}" />
+  </div>
+  <div class="message__content">
+    <div class="message__header">
+      <span class="message__timestamp">{{ message.createdAt | date: 'HH:mm' }} Uhr</span>
+      <span class="message__sender">{{ getSender()?.name }}</span>
+    </div>
+    <div class="message__text" [innerHTML]="parseMessage()"></div>
+    <div class="message__footer">
+      <div class="message__footer-answer"></div>
+      <div class="message__footer-emoji">
+        <button
+          class="btn btn--chat-action material-symbols-outlined"
+          (click)="toggleEmojiPicker()"
+        >
+          <span class="material-symbols-outlined"> add_reaction </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

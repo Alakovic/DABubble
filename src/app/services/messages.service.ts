@@ -1,7 +1,16 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { Firestore, collection, addDoc, query, orderBy, onSnapshot } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { Message } from '../models/message.class';
-import { Mention, MessageInterface } from '../interfaces/message-interface';
+import { Mention, MessageInterface, MessageReaction } from '../interfaces/message-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +24,11 @@ export class MessagesService {
   async sendMessage(chatId: string, message: Message) {
     const messRef = collection(this.firestore, 'chats', chatId, 'messages');
     await addDoc(messRef, message.toJSON());
+  }
+
+  async addReaction(chatId: string, messageId: string, reactions: MessageReaction[]) {
+    const messRef = doc(this.firestore, 'chats', chatId, 'messages', messageId);
+    await updateDoc(messRef, { reactions: reactions });
   }
 
   loadMessages(chatId: string) {

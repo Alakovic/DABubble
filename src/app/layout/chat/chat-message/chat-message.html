@@ -1,23 +1,40 @@
 <div class="message" [class.message--own]="isOwnMessage()">
-  <div class="message__avatar-wrapper">
-    <img class="message__avatar" [src]="getSender()?.avatar" alt="{{ getSender()?.name }}" />
-  </div>
-  <div class="message__content">
-    <div class="message__header">
-      <span class="message__timestamp">{{ message.createdAt | date: 'HH:mm' }} Uhr</span>
-      <span class="message__sender">{{ getSender()?.name }}</span>
+  <div class="message__wrapper">
+    <div class="message__avatar-wrapper">
+      <img class="message__avatar" [src]="getSender()?.avatar" alt="{{ getSender()?.name }}" />
     </div>
-    <div class="message__text" [innerHTML]="parseMessage()"></div>
-    <div class="message__footer">
-      <div class="message__footer-answer"></div>
-      <div class="message__footer-emoji">
-        <button
-          class="btn btn--chat-action material-symbols-outlined"
-          (click)="toggleEmojiPicker()"
-        >
-          <span class="material-symbols-outlined"> add_reaction </span>
-        </button>
+    <div class="message__content">
+      <div class="message__header">
+        <span class="message__timestamp">{{ message.createdAt | date: 'HH:mm' }} Uhr</span>
+        <span class="message__sender">{{ getSender()?.name }}</span>
       </div>
+      <div class="message__text" [innerHTML]="parseMessage()"></div>
     </div>
+  </div>
+  <div class="message__footer">
+    <div class="message__reaction-button">
+      <button class="btn btn--chat-action material-symbols-outlined" (click)="toggleEmojiPicker()">
+        <span class="material-symbols-outlined"> add_reaction </span>
+      </button>
+    </div>
+    <div class="message__reactions">
+      @for (reaction of message.reactions; track reaction.emoji) {
+        <div class="message__footer-emoji">
+          <button class="btn btn--reaction">
+            <img [src]="getReactionIcon(reaction.emoji)" class="message__emoji" />
+            <span class="message__reaction-count">{{ reaction.userIds.length }}</span>
+          </button>
+        </div>
+      }
+    </div>
+    @if (showEmojis()) {
+      <div class="message__emoji-list">
+        @for (emoji of emojis; track emoji) {
+          <button class="btn btn--emoji" (click)="addReaction(emoji.value)">
+            <img [src]="emoji.icon" alt="emoji" class="btn__icon btn__icon--emoji" />
+          </button>
+        }
+      </div>
+    }
   </div>
 </div>

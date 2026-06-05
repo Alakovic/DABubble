@@ -4,10 +4,17 @@ export interface MessageInterface {
     text:string;
     createdAt:number;
     mentions:Mention[];
+    reactions?:MessageReaction[];
 }
 
 
 export interface Mention {
   id: string;
   name: string;
+}
+
+
+export interface MessageReaction {
+  emoji: string;
+  userIds: string[];
 }

@@ -1,4 +1,4 @@
-import { Mention, MessageInterface } from "../interfaces/message-interface";
+import { Mention, MessageInterface, MessageReaction } from "../interfaces/message-interface";
 
 export class Message implements MessageInterface {
   id: string;
@@ -6,6 +6,7 @@ export class Message implements MessageInterface {
   text: string;
   createdAt: number;
   mentions: Mention[] = [];
+  reactions?: MessageReaction[];
 
   constructor(data?: Partial<MessageInterface>) {
     this.id = data?.id ?? '';
@@ -13,6 +14,7 @@ export class Message implements MessageInterface {
     this.text = data?.text ?? '';
     this.createdAt = data?.createdAt ?? Date.now();
     this.mentions = data?.mentions ?? [];
+    this.reactions = data?.reactions ?? [];
   }
 
   toJSON() {
@@ -21,6 +23,7 @@ export class Message implements MessageInterface {
       text: this.text,
       createdAt: this.createdAt,
       mentions: this.mentions,
+      reactions: this.reactions,
     };
   }
 }

@@ -1,8 +1,11 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, signal } from '@angular/core';
 import { MessageInterface } from '../../../interfaces/message-interface';
 import { UserService } from '../../../services/user.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { EMOJIS } from '../../../data/emojis';
+import { MessagesService } from '../../../services/messages.service';
+import { ChatService } from '../../../services/chat.service';
 
 @Component({
   selector: 'app-chat-message',
@@ -12,7 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ChatMessage {
   @Input() message!: MessageInterface;
+  chatService = inject(ChatService);
   userService = inject(UserService);
+  messageService = inject(MessagesService);
+  showEmojis = signal(false);
+
+  emojis = EMOJIS.map((name) => ({
+    icon: `assets/img/emojis/${name}.png`,
+    value: `:${name}:`,
+  }));
 
   parseMessage(): string {
     let text = this.message.text;
@@ -38,6 +49,31 @@ export class ChatMessage {
   }
 
   toggleEmojiPicker() {
-    // Implement your emoji picker toggle logic here
+    this.showEmojis.update((show) => !show);
+  }
+
+  async addReaction(emoji: string) {
+    const userId = this.userService.loggedUser()!.id;
+    const reactions = [...(this.message.reactions ?? [])];
+    const existingReaction = reactions.find((reaction) => reaction.emoji === emoji);
+    if (!existingReaction) {
+      reactions.push({
+        emoji,
+        userIds: [userId],
+      });
+    } else if (!existingReaction.userIds.includes(userId)) {
+      existingReaction.userIds.push(userId);
+    }
+    this.showEmojis.update((show) => !show);
+    await this.messageService.addReaction(
+      this.chatService.activeChatId(),
+      this.message.id,
+      reactions,
+    );
+    
+  }
+
+  getReactionIcon(emoji: string) {
+    return `assets/img/emojis/${emoji.replaceAll(':', '')}.png`;
   }
 }

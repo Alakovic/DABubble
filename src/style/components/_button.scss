@@ -332,4 +332,11 @@
       cursor: pointer;
     }
   }
-}
+
+  &--reaction {
+    border: 2px solid v.$bg-gray;
+    background: transparent;
+    padding: 5px;
+    gap: 2px;
+    }
+  }

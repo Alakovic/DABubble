@@ -7,6 +7,8 @@ export class Message implements MessageInterface {
   createdAt: number;
   mentions: Mention[] = [];
   reactions?: MessageReaction[];
+  edited?: boolean;
+  updatedAt?: number;
 
   constructor(data?: Partial<MessageInterface>) {
     this.id = data?.id ?? '';
@@ -15,6 +17,8 @@ export class Message implements MessageInterface {
     this.createdAt = data?.createdAt ?? Date.now();
     this.mentions = data?.mentions ?? [];
     this.reactions = data?.reactions ?? [];
+    this.edited = data?.edited ?? false;
+    this.updatedAt = data?.updatedAt 
   }
 
   toJSON() {
@@ -24,6 +28,8 @@ export class Message implements MessageInterface {
       createdAt: this.createdAt,
       mentions: this.mentions,
       reactions: this.reactions,
+      edited: this.edited,
+      updatedAt: this.updatedAt,
     };
   }
 }

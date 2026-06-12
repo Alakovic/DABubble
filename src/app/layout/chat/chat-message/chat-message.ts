@@ -7,7 +7,6 @@ import { EMOJIS } from '../../../data/emojis';
 import { MessagesService } from '../../../services/messages.service';
 import { ChatService } from '../../../services/chat.service';
 
-
 @Component({
   selector: 'app-chat-message',
   imports: [CommonModule, DatePipe, MatIconModule],
@@ -20,6 +19,10 @@ export class ChatMessage {
   userService = inject(UserService);
   messageService = inject(MessagesService);
   showEmojis = signal(false);
+  isDirectMessage: boolean = true;
+  showMessageMenu = signal(false);
+  isEditing = signal(false);
+  editedMessage = signal('');
 
   emojis = EMOJIS.map((name) => ({
     icon: `assets/img/emojis/${name}.png`,
@@ -77,11 +80,32 @@ export class ChatMessage {
     return `assets/img/emojis/${emoji.replaceAll(':', '')}.png`;
   }
 
- getReactionName(userId: string): string {
-  return (
-    this.userService
-      .allUsers()
-      .find((user) => user.id === userId)?.name ?? 'Unknown User'
-  );
-}
+  getReactionName(userId: string): string {
+    return this.userService.allUsers().find((user) => user.id === userId)?.name ?? 'Unknown User';
+  }
+
+  toggleMessageMenu() {
+    this.showMessageMenu.update((show) => !show);
+  }
+  editMessage() {
+    this.editedMessage.set(this.message.text);
+    this.isEditing.set(true);
+    this.showMessageMenu.set(false);
+  }
+
+  async saveEdit() {
+    const newText = this.editedMessage().trim();
+    if (!newText) return;
+    await this.messageService.updateMessage(
+      this.chatService.activeChatId(),
+      this.message.id,
+      newText,
+    );
+    this.isEditing.set(false);
+  }
+  
+  cancelEdit() {
+    this.isEditing.set(false);
+    this.editedMessage.set('');
+  }
 }

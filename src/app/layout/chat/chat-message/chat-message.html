@@ -4,11 +4,45 @@
       <img class="message__avatar" [src]="getSender()?.avatar" alt="{{ getSender()?.name }}" />
     </div>
     <div class="message__content">
+      @if (isOwnMessage() && isDirectMessage) {
+        <div class="message__actions">
+          <button class="btn btn--message-menu" (click)="toggleMessageMenu()">
+            <span class="material-symbols-outlined"> more_vert </span>
+          </button>
+          @if (showMessageMenu()) {
+            <div class="message__menu">
+              <button class="btn btn--menu-item" (click)="editMessage()">
+                <span class="material-symbols-outlined"> edit </span>
+              </button>
+            </div>
+          }
+        </div>
+      }
       <div class="message__header">
         <span class="message__timestamp">{{ message.createdAt | date: 'HH:mm' }} Uhr</span>
+        @if (message.edited) {
+          <span class="message__edited">(edited)</span>
+        }
         <span class="message__sender">{{ getSender()?.name }}</span>
       </div>
-      <div class="message__text" [innerHTML]="parseMessage()"></div>
+      @if (!isEditing()) {
+        <div class="message__text" [innerHTML]="parseMessage()"></div>
+      } @else {
+        <div class="message__edit">
+          <textarea
+            class="message__edit-input"
+            [value]="editedMessage()"
+            (input)="editedMessage.set($any($event.target).value)"
+          >
+          </textarea>
+
+          <div class="message__edit-actions">
+            <button class="btn btn--secondary" (click)="isEditing.set(false)">Cancel</button>
+
+            <button class="btn btn--primary" (click)="saveEdit()">Save</button>
+          </div>
+        </div>
+      }
     </div>
   </div>
   <div class="message__footer">

@@ -338,5 +338,27 @@
     background: transparent;
     padding: 5px;
     gap: 2px;
+  }
+
+  &--message-menu{
+    border: none;
+    background: transparent;
+    padding: 5px;
+    &:hover {
+      background-color:white;
+      cursor: pointer;
     }
   }
+ 
+  &--menu-item {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 5px 10px;
+    width: 100%;
+    text-align: left;
+    &:hover {
+      background-color: white;
+      cursor: pointer;
+    }
+  }
+}

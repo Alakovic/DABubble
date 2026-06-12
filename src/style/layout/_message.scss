@@ -7,10 +7,15 @@
   padding-block: 5px;
   padding-left: 15px;
   gap: 8px;
+  position: relative;
   &:hover {
     background: v.$btn-tertiary-hover;
     .message__footer-emoji {
       background: v.$text-white;
+    }
+    .message__actions {
+      opacity: 1;
+      visibility: visible;
     }
   }
   &:hover:not(.message--own) {
@@ -145,7 +150,7 @@
   &__reaction-user {
     position: absolute;
     transform: translateX(-50%) translateY(8px);
-    width:auto;
+    width: auto;
     padding: 12px;
     background: white;
     border-radius: 16px;
@@ -156,8 +161,21 @@
     z-index: 1000;
   }
 
-   &__reaction-user-name {
+  &__reaction-user-name {
     font-size: 14px;
     white-space: nowrap;
-   }
+  }
+
+  &__actions {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 150ms ease-in-out;
+  }
+  &__menu {
+    position: absolute;
+    left: 30px;
+    top: 0;
+  }
 }

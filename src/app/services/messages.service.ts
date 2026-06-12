@@ -42,8 +42,8 @@ export class MessagesService {
     });
   }
 
-  async updateMessage(chatId: string, messageId: string, text: string) {
+  async updateMessage(chatId: string, messageId: string, text: string, mentions: Mention[]) {
     const messRef = doc(this.firestore, 'chats', chatId, 'messages', messageId);
-    await updateDoc(messRef, { text, edited: true, updatedAt: Date.now() });
+    await updateDoc(messRef, { text, mentions, edited: true, updatedAt: Date.now() });
   }
 }

@@ -88,6 +88,10 @@
     align-items: center;
     padding-inline: 25px;
     padding-bottom: 30px;
+    &--editing {
+      padding: 0;
+      height: auto;
+    }
   }
 
   &__message-box {
@@ -130,6 +134,11 @@
     border: 1px solid #adb0d9;
     border-radius: 15px 15px 15px 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    &--editing {
+      bottom: -220px;
+      border-radius: 0px 15px 15px 15px;
+      z-index: 10;
+    }
   }
 
   &__mention-list {
@@ -137,12 +146,20 @@
     width: 300px;
     max-height: 250px;
     overflow-y: auto;
+    &--editing {
+      left: 70px;
+    }
   }
   &__emoji-list {
     left: 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
+    &--editing {
+      bottom: -35px;
+      display: flex;
+      padding:  10px;
+    }
   }
 
   &__separator {

@@ -1,11 +1,13 @@
 import { Component, Input, inject, signal } from '@angular/core';
-import { MessageInterface } from '../../../interfaces/message-interface';
+import { Mention, MessageInterface } from '../../../interfaces/message-interface';
 import { UserService } from '../../../services/user.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { EMOJIS } from '../../../data/emojis';
 import { MessagesService } from '../../../services/messages.service';
 import { ChatService } from '../../../services/chat.service';
+import { Message } from '../../../models/message.class';
+import { UserInterface } from '../../../interfaces/user-interface';
 
 @Component({
   selector: 'app-chat-message',
@@ -18,11 +20,14 @@ export class ChatMessage {
   chatService = inject(ChatService);
   userService = inject(UserService);
   messageService = inject(MessagesService);
+  showEmojisEditing = signal(false);
   showEmojis = signal(false);
   isDirectMessage: boolean = true;
   showMessageMenu = signal(false);
   isEditing = signal(false);
   editedMessage = signal('');
+  showList = signal(false);
+  editingMentions = signal<Mention[]>([]);
 
   emojis = EMOJIS.map((name) => ({
     icon: `assets/img/emojis/${name}.png`,
@@ -89,6 +94,7 @@ export class ChatMessage {
   }
   editMessage() {
     this.editedMessage.set(this.message.text);
+    this.editingMentions.set([...(this.message.mentions ?? [])]);
     this.isEditing.set(true);
     this.showMessageMenu.set(false);
   }
@@ -100,12 +106,32 @@ export class ChatMessage {
       this.chatService.activeChatId(),
       this.message.id,
       newText,
+      this.editingMentions(),
     );
     this.isEditing.set(false);
   }
-  
+
   cancelEdit() {
     this.isEditing.set(false);
     this.editedMessage.set('');
+  }
+
+  toggleUserList() {
+    this.showList.update((show) => !show);
+  }
+
+  toggleEmojiPickerEdit() {
+    this.showEmojisEditing.update((show) => !show);
+  }
+
+  addEmoji(emoji: string) {
+    this.editedMessage.update((text) => text + emoji);
+    this.showEmojisEditing.set(false);
+  }
+
+  mentionUser(user: UserInterface) {
+    this.editedMessage.update((text) => text + ` @${user.name} `);
+    this.editingMentions.update((mentions) => [...mentions, { id: user.id, name: user.name }]);
+    this.showList.set(false);
   }
 }

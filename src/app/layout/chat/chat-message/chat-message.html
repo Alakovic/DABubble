@@ -3,7 +3,7 @@
     <div class="message__avatar-wrapper">
       <img class="message__avatar" [src]="getSender()?.avatar" alt="{{ getSender()?.name }}" />
     </div>
-    <div class="message__content">
+    <div class="message__content" [class.message__content--editing]="isEditing()">
       @if (isOwnMessage() && isDirectMessage) {
         <div class="message__actions">
           <button class="btn btn--message-menu" (click)="toggleMessageMenu()">
@@ -28,18 +28,58 @@
       @if (!isEditing()) {
         <div class="message__text" [innerHTML]="parseMessage()"></div>
       } @else {
-        <div class="message__edit">
-          <textarea
-            class="message__edit-input"
-            [value]="editedMessage()"
-            (input)="editedMessage.set($any($event.target).value)"
-          >
-          </textarea>
-
-          <div class="message__edit-actions">
-            <button class="btn btn--secondary" (click)="isEditing.set(false)">Cancel</button>
-
-            <button class="btn btn--primary" (click)="saveEdit()">Save</button>
+        <div class="chat__input chat__input--editing">
+          <div class="chat__message-box chat__message-box--editing">
+            <textarea
+              class="chat__input-field"
+              [value]="editedMessage()"
+              (input)="editedMessage.set($any($event.target).value)"
+            >
+            </textarea>
+            <div class="chat__input-actions">
+              <button class="btn btn--action" (click)="toggleEmojiPickerEdit()">
+                <mat-icon>sentiment_satisfied</mat-icon>
+              </button>
+              <button class="btn btn--action" (click)="toggleUserList()">
+                <mat-icon>alternate_email</mat-icon>
+              </button>
+              <button class="btn btn--send" (click)="saveEdit()">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+            @if (showList()) {
+              <div class="chat__mention-list chat__mention-list--editing">
+                @for (user of userService.allUsers(); track user.id) {
+                  <button class="btn btn--user" (click)="mentionUser(user)">
+                    <div
+                      class="users__avatar-wrapper"
+                      [class.users__avatar-wrapper--offline]="user.status !== 'online'"
+                    >
+                      <img
+                        class="btn__icon btn__icon--user"
+                        [src]="user.avatar"
+                        alt="{{ user.name }}"
+                      />
+                    </div>
+                    <div class="btn__text btn__text--user">
+                      {{ user.name }}
+                      @if (user.email === userService.loggedUser()?.email) {
+                        <span class="users__sufix">(Du)</span>
+                      }
+                    </div>
+                  </button>
+                }
+              </div>
+            }
+            @if (showEmojisEditing()) {
+              <div class="chat__emoji-list chat__emoji-list--editing">
+                @for (emoji of emojis; track emoji) {
+                  <button class="btn btn--emoji" (click)="addEmoji(emoji.value)">
+                    <img [src]="emoji.icon" alt="emoji" class="btn__icon btn__icon--emoji" />
+                  </button>
+                }
+              </div>
+            }
           </div>
         </div>
       }

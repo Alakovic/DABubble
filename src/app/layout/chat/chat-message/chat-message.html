@@ -24,6 +24,11 @@
             <img [src]="getReactionIcon(reaction.emoji)" class="message__emoji" />
             <span class="message__reaction-count">{{ reaction.userIds.length }}</span>
           </button>
+          @for (userId of reaction.userIds; track userId) {
+            <div class="message__reaction-user">
+              <span class="message__reaction-user-name">{{ getReactionName(userId) }}</span>
+            </div>
+          }
         </div>
       }
     </div>

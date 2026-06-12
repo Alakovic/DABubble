@@ -7,6 +7,7 @@ import { EMOJIS } from '../../../data/emojis';
 import { MessagesService } from '../../../services/messages.service';
 import { ChatService } from '../../../services/chat.service';
 
+
 @Component({
   selector: 'app-chat-message',
   imports: [CommonModule, DatePipe, MatIconModule],
@@ -70,10 +71,17 @@ export class ChatMessage {
       this.message.id,
       reactions,
     );
-    
   }
 
   getReactionIcon(emoji: string) {
     return `assets/img/emojis/${emoji.replaceAll(':', '')}.png`;
   }
+
+ getReactionName(userId: string): string {
+  return (
+    this.userService
+      .allUsers()
+      .find((user) => user.id === userId)?.name ?? 'Unknown User'
+  );
+}
 }

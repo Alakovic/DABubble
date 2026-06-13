@@ -1,0 +1,40 @@
+@use '../abstracts/variables' as v;
+
+.create {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  &__description {
+    padding-block: 20px;
+    font-size: 20px;
+  }
+  &__highlight {
+    font-weight: 600;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+  &__label {
+    font-size: 20px;
+    padding-bottom: 15px;
+    font-weight: 600;
+  }
+
+  &__optional{
+    font-weight: 400;
+    color: v.$text-gray;
+  }
+}

@@ -38,7 +38,6 @@ export class Register {
       email: this.userform.value.email || '',
       password: this.userform.value.password || '',
     });
-    console.log(this.authService.registerData());
     this.router.navigate(['/select-avatar']);
   }
 }

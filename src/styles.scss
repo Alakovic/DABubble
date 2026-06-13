@@ -53,3 +53,15 @@ body {
     width: 400px !important;
   }
 }
+
+.create-channel-dialog {
+  .mat-mdc-dialog-surface {
+    border-radius: 20px !important;
+    padding: 30px;
+    width: 800px !important;
+  }
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  max-width: 800px !important;
+}

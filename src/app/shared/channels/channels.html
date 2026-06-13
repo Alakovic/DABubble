@@ -7,13 +7,13 @@
       <mat-icon fontSet="material-symbols-outlined">spoke</mat-icon>
       <span class="channels__title">Channels</span>
     </label>
-    <button class="btn btn--add-channel">
+    <button class="btn btn--add-channel" (click)="openDialog()">
       <mat-icon fontSet="material-symbols-outlined">add</mat-icon>
     </button>
   </div>
   @if (channelsOpen()) {
   <div class="channels__list">
-    <button class="channels__item"># general</button>
+    <button class="btn btn--add-channel-bottom"># General</button>
   </div>
   <button class="btn btn--add-channel-bottom">
     <mat-icon fontSet="material-symbols-outlined">add_circle</mat-icon>

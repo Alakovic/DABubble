@@ -1,0 +1,49 @@
+<div class="create">
+  <div class="create__header">
+    <h2 class="create__title">Channel erstellen</h2>
+    <button class="btn btn--close" (click)="closeDialog()">
+      <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+    </button>
+  </div>
+  <p class="create__description">
+    Channels dienen Team zur Kommunikation. Am besten sollten sie themenbezogen sein
+    <span class="create__highlight">#marketing</span> zum Beispiel.
+  </p>
+  <form class="create__form" [formGroup]="createForm" (ngSubmit)="sendData()">
+    <div class="register__field">
+      <label class="create__label">Channel-name</label>
+      <label class="register__card-form-field">
+        <mat-icon matPrefix class="register__icon material-symbols-outlined">tag</mat-icon>
+        <input
+          class="register__input"
+          matInput
+          type="text"
+          placeholder="z.B. Kooperationsprojekte"
+          formControlName="name"
+        />
+      </label>
+      @if (createForm.get('name')?.touched) {
+        @if (createForm.get('name')?.errors?.['required']) {
+          <div class="register__error-message">Bitte geben Sie einen Channel-Namen ein.</div>
+        } @else if (createForm.get('name')?.errors?.['minlength']) {
+          <div class="register__error-message">Der Channel-Name muss mindestens 5 Zeichen lang sein.</div>
+        }
+      }
+    </div>
+    <div class="register__field">
+      <label class="create__label"
+        >Beschreibung <span class="create__optional">(optional)</span></label
+      >
+      <label class="register__card-form-field">
+        <input
+          class="register__input"
+          matInput
+          type="text"
+          placeholder="Dein Text hier"
+          formControlName="description"
+        />
+      </label>
+    </div>
+    <button class="btn btn--primary" type="submit" [disabled]="createForm.invalid">Weiter</button>
+  </form>
+</div>

@@ -158,6 +158,9 @@
     border-radius: 0;
     background-color: transparent;
     border: none;
+    padding:0;
+    gap: 0;
+    justify-content: center;
     &:hover {
       color: v.$text-blue-dark;
       cursor: pointer;
@@ -358,6 +361,18 @@
     text-align: left;
     &:hover {
       background-color: white;
+      cursor: pointer;
+    }
+  }
+
+  &--close{
+    border: none;
+    background: transparent;
+    padding: 5px;
+    margin-left: auto;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
       cursor: pointer;
     }
   }

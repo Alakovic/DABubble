@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatDialogRef,MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ChannelService } from '../../services/channel-service';
@@ -34,7 +34,9 @@ export class CreateChannel {
       description: this.createForm.value.description || '',
     });
     this.dialogRef.close();
-    this.dialog.open(AddMembers)
+    this.dialog.open(AddMembers, {
+      panelClass: 'create-channel-dialog',
+    });
   }
 
   closeDialog(): void {
@@ -44,4 +46,5 @@ export class CreateChannel {
       description: '',
     });
   }
+
 }

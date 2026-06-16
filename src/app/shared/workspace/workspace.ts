@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,7 +11,7 @@ import { Sidebar } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-workspace',
-  imports: [RouterOutlet, MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule, Sidebar],
+  imports: [RouterOutlet, MatIconModule, MatMenuModule, MatButtonModule, MatDialogModule, Sidebar, RouterLink],
   templateUrl: './workspace.html',
   styleUrls: ['./workspace.scss'],
 })

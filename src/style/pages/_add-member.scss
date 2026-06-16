@@ -1,0 +1,62 @@
+@use '../abstracts/variables' as v;
+
+.add-members {
+  display: flex;
+  flex-direction: column;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+  }
+
+  &__label {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    &:hover {
+      cursor: pointer;
+      color: v.$text-blue-dark;
+    }
+  }
+
+  &__input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #adb0d9;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s ease;
+    &:hover {
+      border-color: v.$text-blue;
+      cursor: pointer;
+    }
+    &:checked {
+      border-color: v.$text-blue;
+    }
+    &:checked::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: v.$text-blue;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:checked + .add-members__option {
+      color: v.$text-blue;
+      font-weight: 500; 
+    }
+  }
+}

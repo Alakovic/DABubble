@@ -1,9 +1,10 @@
-export interface Channel {
-  id: number;
+export interface ChannelInterface {
+  id: string;
   name: string;
   description: string;
   createdAt: number;
   participants: string[];
+  createdBy: string;
 }
 
 export interface RawChannelData {

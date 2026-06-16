@@ -1,15 +1,19 @@
-export class Channel implements Channel {
-  id: number;
+import { ChannelInterface } from '../interfaces/channel-interface';
+
+export class Channel implements ChannelInterface {
+  id: string;
   name: string;
   description: string;
   createdAt: number;
   participants: string[];
-
-  constructor(data?: Partial<Channel>) {
-    this.id = data?.id ?? 0;
+  createdBy: string;
+  constructor(data?: Partial<ChannelInterface>) {
+    this.id = data?.id ?? "";
     this.name = data?.name ?? '';
     this.description = data?.description ?? '';
     this.createdAt = data?.createdAt ?? Date.now();
+    this.createdBy = data?.createdBy ?? '';
+
     this.participants = data?.participants ?? [];
   }
 
@@ -18,6 +22,7 @@ export class Channel implements Channel {
       name: this.name,
       description: this.description,
       createdAt: this.createdAt,
+      createdBy: this.createdBy,
       participants: this.participants,
     };
   }

@@ -17,7 +17,7 @@
     }
   }
 
-  &__name {
+  &__name, &__description {
     border: 1px solid #adb0d9;
     border-radius: 15px;
     padding: 15px;
@@ -27,6 +27,10 @@
     &--editing {
       border: none;
     }
+  }
+
+  &__description{
+    margin-bottom: 20px;
   }
 
   &__top {
@@ -92,5 +96,21 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  &__separator {
+    height: 1px;
+    background-color: #adb0d9;
+    margin: 20px 0;
+  }
+
+  &__creator-title{
+    padding-bottom: 20px;
+  }
+
+  &__creator-name {
+    font-size: 18px;
+    color: v.$text-blue-dark;
+    font-weight: 500;
   }
 }

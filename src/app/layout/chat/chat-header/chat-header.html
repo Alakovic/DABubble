@@ -38,7 +38,7 @@
         (backdropClick)="closeInfo()"
         (detach)="closeInfo()"
       >
-        <app-channel-info></app-channel-info>
+        <app-channel-info (close)="closeInfo()"> ></app-channel-info>
       </ng-template>
     </div>
     <div class="chat__header-right">

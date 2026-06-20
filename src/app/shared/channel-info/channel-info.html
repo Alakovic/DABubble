@@ -1,15 +1,19 @@
 @if (channelService.selectedChannel(); as channel) {
-  <div class="channel">
+  <form class="channel" [formGroup]="channelForm">
     <div class="channel__header">
       <h2># {{ channel.name }}</h2>
-      <button class="btn btn--close">
+      <button class="btn btn--close" (click)="close.emit()">
         <mat-icon>close</mat-icon>
       </button>
     </div>
     <div class="channel__name" [class.channel__name--editing]="isEditingName()">
       <div class="channel__top" [class.channel__top--editing]="isEditingName()">
         <span class="channel__name-title">Channel-Name</span>
-        <button type="button" class="btn btn--edit" (click)="isEditingName.set(!isEditingName())">
+        <button
+          type="button"
+          class="btn btn--edit"
+          (click)="isEditingName() ? saveName() : editName()"
+        >
           {{ isEditingName() ? 'Speichern' : 'Bearbeiten' }}
         </button>
       </div>
@@ -18,15 +22,34 @@
       } @else {
         <label class="channel__name-edit">
           <mat-icon matPrefix class="channel__icon material-symbols-outlined"> tag </mat-icon>
-          <input
-            class="channel__input"
-            matInput
-            type="text"
-            [value]="channel.name"
-            formControlName="name"
-          />
+          <input class="channel__input" matInput type="text" formControlName="name" />
         </label>
       }
     </div>
-  </div>
+    <div class="channel__description" [class.channel__name--editing]="isEditingDescription()">
+      <div class="channel__top" [class.channel__top--editing]="isEditingDescription()">
+        <span class="channel__name-title">Beschreibung</span>
+        <button
+          type="button"
+          class="btn btn--edit"
+          (click)="isEditingDescription() ? saveDescription() : editDescription()"
+        >
+          {{ isEditingDescription() ? 'Speichern' : 'Bearbeiten' }}
+        </button>
+      </div>
+      @if (!isEditingDescription()) {
+        <span class="channel__value"> {{ channel.description || 'Keine Beschreibung' }} </span>
+      } @else {
+        <label class="channel__name-edit">
+          <input class="channel__input" matInput type="text" formControlName="description" />
+        </label>
+      }
+      <div class="channel__separator"></div>
+      <div class="channel__creator">
+        <h3 class="channel__creator-title">Erstellt von</h3>
+        <span class="channel__creator-name">{{ getCreatorName() }}</span>
+      </div>
+    </div>
+    <button class="btn btn--primary">Channel verlassen</button>
+  </form>
 }

@@ -64,4 +64,9 @@ export class ChannelService {
     this.unsubscribeChannel = undefined;
     this.selectedChannel.set(null);
   }
+  
+  updateChannel(id: string, data: Partial<ChannelInterface>) {
+    const channelRef = doc(this.firestore, 'channels', id);
+    return updateDoc(channelRef, data);
+  }
 }

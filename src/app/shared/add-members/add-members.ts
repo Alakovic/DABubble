@@ -50,6 +50,11 @@ export class AddMembers {
     }
     const channel = this.channelData(members, loggedUser.id);
     await this.channelService.addChannel(channel);
+    this.channelService.rawChannelData.set({
+      name: '',
+      description: '',
+    });
+
     this.dialogRef.close();
   }
 

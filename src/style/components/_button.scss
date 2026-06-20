@@ -156,7 +156,7 @@
     }
   }
 
-  &--add-member{
+  &--add-member {
     background-color: v.$bg-gray;
     border: none;
     color: v.$text-black;
@@ -171,6 +171,30 @@
       color: v.$text-blue-dark;
       cursor: pointer;
     }
+  }
+
+  &--channel {
+    background-color: transparent;
+    border: none;
+    color: v.$text-black;
+    font-size: 18px;
+    padding: 5px 10px;
+    text-align: left;
+    align-self: flex-start;
+    gap: 0;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--channel-active {
+    background-color: v.$bg-gray;
+    color: v.$text-blue-dark;
+    font-weight: 600;
   }
 
   &--add-channel-bottom {

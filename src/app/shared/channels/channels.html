@@ -12,9 +12,9 @@
     </button>
   </div>
   @if (channelsOpen()) {
-    @for(channel of channelService.allChannels(); track channel.id){
+    @for(channel of myChannels(); track channel.id){
   <div class="channels__list">
-    <button class="btn btn--add-channel-bottom" (click)="openChannel(channel.id)"># {{ channel.name }}</button>
+    <button class="btn btn--channel"   [class.btn--channel-active]="activeChannelId === channel.id" (click)="openChannel(channel.id)"># {{ channel.name }}</button>
   </div>
   }
   <button class="btn btn--add-channel-bottom" (click)="openDialog()">

@@ -93,6 +93,7 @@
     color: v.$text-blue-dark;
     font-size: 18px;
     padding: 10px 20px;
+    transition: transform 0.3s ease;
     &:hover {
       background-color: v.$bg-gray;
       color: v.$text-blue-dark;
@@ -136,6 +137,7 @@
       cursor: pointer;
     }
   }
+
   &--add-channel {
     background-color: transparent;
     border: none;
@@ -149,6 +151,23 @@
     margin-left: auto;
     &:hover {
       background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+      cursor: pointer;
+    }
+  }
+
+  &--add-member{
+    background-color: v.$bg-gray;
+    border: none;
+    color: v.$text-black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 5px;
+
+    &:hover {
       color: v.$text-blue-dark;
       cursor: pointer;
     }

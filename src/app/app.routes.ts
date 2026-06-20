@@ -7,6 +7,7 @@ import { Workspace } from './shared/workspace/workspace';
 import { NewPassword } from './shared/new-password/new-password';
 import { WelcomeScreen } from './shared/welcome-screen/welcome-screen';
 import { DirectMessage } from './shared/direct-message/direct-message';
+import { SingleChannel } from './shared/single-channel/single-channel';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,10 @@ export const routes: Routes = [
             {
                 path: 'chat/:id',
                 component: DirectMessage
+            },
+            {
+                path: 'channel/:id',
+                component: SingleChannel
             }
         ] 
     },

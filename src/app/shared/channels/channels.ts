@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateChannel } from '../create-channel/create-channel';
 import { ChannelService } from '../../services/channel-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-channels',
@@ -14,6 +15,7 @@ export class Channels {
   channelsOpen = signal(true);
   dialog = inject(MatDialog);
   channelService = inject(ChannelService);
+  router = inject(Router);
   unsubscribe?: () => void;
 
   ngOnInit() {
@@ -34,5 +36,9 @@ export class Channels {
     this.dialog.open(CreateChannel, {
       panelClass: 'create-channel-dialog',
     });
+  }
+
+  openChannel(channelId: string) {
+    this.router.navigate(['/workspace/channel', channelId]);
   }
 }

@@ -20,6 +20,8 @@ import { Channel } from '../models/channel.class';
 export class ChannelService {
   firestore = inject(Firestore);
   allChannels = signal<ChannelInterface[]>([]);
+  selectedChannel = signal<ChannelInterface | null>(null);
+  private unsubscribeChannel?: () => void;
 
   rawChannelData = signal<RawChannelData>({
     name: '',
@@ -40,5 +42,26 @@ export class ChannelService {
       }));
       this.allChannels.set(channels as ChannelInterface[]);
     });
+  }
+
+  listenChannel(id: string) {
+    this.unsubscribeChannel?.();
+    const channelRef = doc(this.firestore, 'channels', id);
+    this.unsubscribeChannel = onSnapshot(channelRef, (docSnap) => {
+      if (!docSnap.exists()) {
+        this.selectedChannel.set(null);
+        return;
+      }
+      this.selectedChannel.set({
+        id: docSnap.id,
+        ...docSnap.data(),
+      } as ChannelInterface);
+    });
+  }
+
+  stopListeningChannel() {
+    this.unsubscribeChannel?.();
+    this.unsubscribeChannel = undefined;
+    this.selectedChannel.set(null);
   }
 }

@@ -20,6 +20,13 @@
     padding-left: 35px;
   }
 
+  &__header-right {
+    display: flex;
+    align-items: center;
+    padding-right: 25px;
+    gap: 15px;
+  }
+
   &__avatar {
     width: 40px;
     height: 40px;
@@ -158,7 +165,7 @@
     &--editing {
       bottom: -35px;
       display: flex;
-      padding:  10px;
+      padding: 10px;
     }
   }
 
@@ -183,5 +190,55 @@
     padding: 5px 10px;
     background: white;
     white-space: nowrap;
+  }
+
+  &__channel-title {
+    font-size: 25px;
+    font-weight: 600;
+    color: v.$text-black;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 5px 15px;
+    &:hover {
+      color: v.$text-blue;
+      cursor: pointer;
+      background-color: v.$bg-gray;
+    }
+  }
+
+  &__channel-members {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 2px 5px;
+    &:hover {
+      color: v.$text-blue;
+      cursor: pointer;
+      background-color: v.$bg-gray;
+      .chat__member-count {
+        color: v.$text-blue;
+      }
+    }
+  }
+
+  &__member-count {
+    font-size: 18px;
+    color: v.$text-gray;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  &__member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: -10px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }

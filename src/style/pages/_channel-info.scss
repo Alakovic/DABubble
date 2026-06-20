@@ -1,0 +1,96 @@
+@use '../abstracts/variables' as v;
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  background-color: v.$bg-white;
+  border-radius: 0px 15px 15px 15px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > h2 {
+      font-size: 24px;
+    }
+  }
+
+  &__name {
+    border: 1px solid #adb0d9;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    &--editing {
+      border: none;
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    padding-bottom: 10px;
+    position: relative;
+
+    &--editing {
+      .channel__name-title {
+        transform: translate(-10px, -10px);
+      }
+      .btn--edit {
+        transform: translate(10px, -10px);
+      }
+    }
+  }
+
+  &__name-title {
+    font-size: 20px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+  }
+
+  &__value {
+    font-size: 18px;
+    color: v.$text-black;
+    font-weight: 500;
+  }
+
+  &__name-edit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding:  10px;
+    border-radius: 30px;
+    background-color: transparent;
+    border: 1px solid #adb0d9;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid v.$text-blue;
+    }
+    &:focus-within {
+      border: 1px solid v.$text-blue;
+    }
+    &:focus-within .channel__input {
+      color: v.$text-black;
+    }
+  }
+  &__icon {
+    color: v.$text-black;
+  }
+  &__input {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: v.$text-gray;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

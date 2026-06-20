@@ -1,0 +1,32 @@
+@if (channelService.selectedChannel(); as channel) {
+  <div class="channel">
+    <div class="channel__header">
+      <h2># {{ channel.name }}</h2>
+      <button class="btn btn--close">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="channel__name" [class.channel__name--editing]="isEditingName()">
+      <div class="channel__top" [class.channel__top--editing]="isEditingName()">
+        <span class="channel__name-title">Channel-Name</span>
+        <button type="button" class="btn btn--edit" (click)="isEditingName.set(!isEditingName())">
+          {{ isEditingName() ? 'Speichern' : 'Bearbeiten' }}
+        </button>
+      </div>
+      @if (!isEditingName()) {
+        <span class="channel__value"> # {{ channel.name }} </span>
+      } @else {
+        <label class="channel__name-edit">
+          <mat-icon matPrefix class="channel__icon material-symbols-outlined"> tag </mat-icon>
+          <input
+            class="channel__input"
+            matInput
+            type="text"
+            [value]="channel.name"
+            formControlName="name"
+          />
+        </label>
+      }
+    </div>
+  </div>
+}

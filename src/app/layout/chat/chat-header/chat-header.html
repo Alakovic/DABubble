@@ -1,21 +1,56 @@
 @if (isDirectChat) {
-<div class="chat__header">
-  <div class="chat__header-left">
-    <button class="btn btn--user" (click)="goToProfile()">
-      <div
-        class="users__avatar-wrapper"
-        [class.users__avatar-wrapper--offline]="user?.status !== 'online'"
-      >
-        <img class="btn__icon btn__icon--user" [src]="user?.avatar" alt="{{ user?.name }}" />
-      </div>
-      <div class="btn__text btn__text--user">
-        {{ user?.name }}
-      </div>
-      @if (user?.email === userService.loggedUser()?.email) {
-        <span class="users__sufix">(Du)</span>
-      }
-    </button>
+  <div class="chat__header">
+    <div class="chat__header-left">
+      <button class="btn btn--user" (click)="goToProfile()">
+        <div
+          class="users__avatar-wrapper"
+          [class.users__avatar-wrapper--offline]="user?.status !== 'online'"
+        >
+          <img class="btn__icon btn__icon--user" [src]="user?.avatar" alt="{{ user?.name }}" />
+        </div>
+        <div class="btn__text btn__text--user">
+          {{ user?.name }}
+        </div>
+        @if (user?.email === userService.loggedUser()?.email) {
+          <span class="users__sufix">(Du)</span>
+        }
+      </button>
+    </div>
+    <div class="chat__header-right"></div>
   </div>
-  <div class="chat__header-right"></div>
-</div>
+} @else if (isChannelChat) {
+  <div class="chat__header">
+    <div class="chat__header-left">
+      <div
+        class="chat__channel-title"
+        (click)="displayInfo()"
+        cdkOverlayOrigin
+        #origin="cdkOverlayOrigin"
+      >
+        <span class="chat__channel-name"># {{ channel?.name }}</span>
+        <mat-icon> {{ showInfo() ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }} </mat-icon>
+      </div>
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="origin"
+        [cdkConnectedOverlayOpen]="showInfo()"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        (backdropClick)="closeInfo()"
+        (detach)="closeInfo()"
+      >
+        <app-channel-info></app-channel-info>
+      </ng-template>
+    </div>
+    <div class="chat__header-right">
+      <div class="chat__channel-members">
+        @for (member of getMembers().slice(0, 3); track member.id) {
+          <img class="chat__member-avatar" [src]="member.avatar" [alt]="member.name" />
+        }
+        <span class="chat__member-count">{{ getMembers().length }}</span>
+      </div>
+      <button class="btn btn--add-member">
+        <mat-icon fontSet="material-symbols-outlined"> person_add</mat-icon>
+      </button>
+    </div>
+  </div>
 }

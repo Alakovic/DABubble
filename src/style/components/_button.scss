@@ -158,7 +158,7 @@
     border-radius: 0;
     background-color: transparent;
     border: none;
-    padding:0;
+    padding: 0;
     gap: 0;
     justify-content: center;
     &:hover {
@@ -266,6 +266,11 @@
       color: v.$text-blue-dark;
       cursor: pointer;
     }
+
+    &.btn--selected {
+      background-color: v.$bg-gray;
+      color: v.$text-blue-dark;
+    }
   }
 
   &--user-content {
@@ -343,16 +348,16 @@
     gap: 2px;
   }
 
-  &--message-menu{
+  &--message-menu {
     border: none;
     background: transparent;
     padding: 5px;
     &:hover {
-      background-color:white;
+      background-color: white;
       cursor: pointer;
     }
   }
- 
+
   &--menu-item {
     border: 1px solid transparent;
     background: transparent;
@@ -365,7 +370,7 @@
     }
   }
 
-  &--close{
+  &--close {
     border: none;
     background: transparent;
     padding: 5px;

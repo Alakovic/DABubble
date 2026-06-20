@@ -12,9 +12,11 @@
     </button>
   </div>
   @if (channelsOpen()) {
+    @for(channel of channelService.allChannels(); track channel.id){
   <div class="channels__list">
-    <button class="btn btn--add-channel-bottom"># General</button>
+    <button class="btn btn--add-channel-bottom">#{{ channel.name }}</button>
   </div>
+  }
   <button class="btn btn--add-channel-bottom" (click)="openDialog()">
     <mat-icon fontSet="material-symbols-outlined">add_circle</mat-icon>
     <span>Channel hinzufügen</span>

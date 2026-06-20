@@ -1,5 +1,5 @@
 import { Injectable, signal, inject } from '@angular/core';
-import { RawChannelData } from '../interfaces/channel-interface';
+import { ChannelInterface, RawChannelData } from '../interfaces/channel-interface';
 import {
   Firestore,
   doc,
@@ -10,6 +10,7 @@ import {
   getDoc,
   docData,
   addDoc,
+  onSnapshot,
 } from '@angular/fire/firestore';
 import { Channel } from '../models/channel.class';
 
@@ -18,6 +19,7 @@ import { Channel } from '../models/channel.class';
 })
 export class ChannelService {
   firestore = inject(Firestore);
+  allChannels = signal<ChannelInterface[]>([]);
 
   rawChannelData = signal<RawChannelData>({
     name: '',
@@ -27,5 +29,16 @@ export class ChannelService {
   addChannel(channel: Channel) {
     const channelsRef = collection(this.firestore, 'channels');
     return addDoc(channelsRef, channel.toJSON());
+  }
+
+  getAllChannels() {
+    const channelsRef = collection(this.firestore, 'channels');
+    return onSnapshot(channelsRef, (snapshot) => {
+      const channels = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      this.allChannels.set(channels as ChannelInterface[]);
+    });
   }
 }

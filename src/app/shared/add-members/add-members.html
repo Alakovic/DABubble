@@ -27,10 +27,61 @@
       <span class="add-members__option">Bestimmte Leute hinzufügen</span>
     </label>
     @if (addMembersForm.value.memberMode === 'selected') {
-      <div class="add-members__search">
-        <input type="text" placeholder="Name eingeben" class="add-members__search-input" />
+      <div class="add-members__search" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+        <div class="add-members__search-box">
+          @for (user of selectedUsers; track user.id) {
+            <img
+              class="add-members__selected-avatar"
+              [src]="user.avatar"
+              [alt]="user.name"
+              [title]="user.name"
+              (click)="selectUser(user)"
+            />
+          }
+
+          <input
+            type="text"
+            placeholder="Name eingeben"
+            class="add-members__search-input"
+            [formControl]="searchControl"
+            (focus)="openUserList()"
+          />
+        </div>
       </div>
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="origin"
+        [cdkConnectedOverlayOpen]="showList()"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+        (backdropClick)="closeUserList()"
+      >
+        <div class="add-members__user-list">
+          @for (user of filteredUsers(); track user.id) {
+            <button
+              class="btn btn--user"
+              type="button"
+              (click)="selectUser(user)"
+              [class.btn--selected]="selectedUsers.some((u) => u.id === user.id)"
+            >
+              <div
+                class="users__avatar-wrapper"
+                [class.users__avatar-wrapper--offline]="user.status !== 'online'"
+              >
+                <img class="btn__icon btn__icon--user" [src]="user.avatar" [alt]="user.name" />
+              </div>
+              <div class="btn__text btn__text--user">
+                {{ user.name }}
+              </div>
+            </button>
+          } @empty {
+            <div class="add-members__empty">Keine Benutzer gefunden.</div>
+          }
+        </div>
+      </ng-template>
     }
-     <button class="btn btn--primary" type="submit" [disabled]="addMembersForm.invalid">Erstellen</button>
+    <button class="btn btn--primary" type="submit" [disabled]="!canCreateChannel()">
+      Erstellen
+    </button>
   </form>
 </div>

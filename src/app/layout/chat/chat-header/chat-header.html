@@ -42,15 +42,47 @@
       </ng-template>
     </div>
     <div class="chat__header-right">
-      <div class="chat__channel-members">
+      <div
+        class="chat__channel-members"
+        cdkOverlayOrigin
+        #membersOrigin="cdkOverlayOrigin"
+        (click)="openMembers()"
+      >
         @for (member of getMembers().slice(0, 3); track member.id) {
           <img class="chat__member-avatar" [src]="member.avatar" [alt]="member.name" />
         }
         <span class="chat__member-count">{{ getMembers().length }}</span>
       </div>
-      <button class="btn btn--add-member">
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="membersOrigin"
+        [cdkConnectedOverlayOpen]="showMembers()"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        [cdkConnectedOverlayPositions]="positions"
+        (backdropClick)="closeMembers()"
+        (detach)="closeMembers()"
+      >
+        <app-channel-members (close)="closeMembers()" (openAdd)="openAddMember()"></app-channel-members>
+      </ng-template>
+      <button
+        class="btn btn--add-member"
+        cdkOverlayOrigin
+        #addOrigin="cdkOverlayOrigin"
+        (click)="openAddMember()"
+      >
         <mat-icon fontSet="material-symbols-outlined"> person_add</mat-icon>
       </button>
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="addOrigin"
+        [cdkConnectedOverlayOpen]="showAddMember()"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        [cdkConnectedOverlayPositions]="positions"
+        (backdropClick)="closeAddMember()"
+        (detach)="closeAddMember()"
+      >
+        <app-add-member (close)="closeAddMember()"> </app-add-member>
+      </ng-template>
     </div>
   </div>
 }

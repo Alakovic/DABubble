@@ -3,17 +3,36 @@
 .add-members {
   display: flex;
   flex-direction: column;
+  &--add-member {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px 0 20px 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 25px;
+    &--add-member{
+      font-size: 18px;
+    }
   }
   &__content {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding-top: 20px;
+    &--add-member {
+      padding-bottom: 20px;
+    }
+  }
+
+  &__channel-name {
+    font-size: 20px;
+    color: v.$text-blue-dark;
   }
 
   &__label {

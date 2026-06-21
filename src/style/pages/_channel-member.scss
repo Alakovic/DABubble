@@ -1,0 +1,16 @@
+@use '../abstracts/variables' as v;
+
+.channel-members {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  background-color: v.$bg-white;
+  border-radius: 15px 0px 15px 15px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

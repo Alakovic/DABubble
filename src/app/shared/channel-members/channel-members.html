@@ -1,0 +1,30 @@
+<div class="channel-members">
+  <div class="channel-members__header">
+    <h2>Mitglieder</h2>
+    <button class="btn btn--close" (click)="close.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  @for (member of getMembers(); track member.id) {
+    <button class="btn btn--user" (click)="openProfile(member)">
+      <div
+        class="users__avatar-wrapper"
+        [class.users__avatar-wrapper--offline]="member.status !== 'online'"
+      >
+        <img class="btn__icon btn__icon--user" [src]="member.avatar" [alt]="member.name" />
+      </div>
+
+      <div class="btn__text btn__text--user">
+        {{ member.name }}
+
+        @if (member.email === userService.loggedUser()?.email) {
+          <span class="users__sufix">(Du)</span>
+        }
+      </div>
+    </button>
+  }
+  <button class="btn btn--add" (click)="openAdd.emit()">
+    <mat-icon fontSet="material-symbols-outlined" class="btn__icon btn__icon--add"> person_add</mat-icon>
+    <span class="btn__text">Mitglied hinzufügen</span>   
+  </button>
+</div>

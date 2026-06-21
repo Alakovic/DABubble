@@ -1,0 +1,65 @@
+<div class="add-members add-members--add-member">
+  <div class="add-members__header add-members__header--add-member">
+    <h2 class="add-members__title">Leute hinzufügen</h2>
+    <button class="btn btn--close" (click)="close.emit()">
+      <mat-icon fontSet="material-symbols-outlined">close</mat-icon>
+    </button>
+  </div>
+  <div class="add-members__content add-members__content--add-member">
+    <span class="add-members__channel-name"># {{ channelService.selectedChannel()?.name }}</span>
+    <div class="add-members__search" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+      <div class="add-members__search-box">
+        @for (user of selectedUsers; track user.id) {
+          <img
+            class="add-members__selected-avatar"
+            [src]="user.avatar"
+            [alt]="user.name"
+            [title]="user.name"
+            (click)="selectUser(user)"
+          />
+        }
+        <input
+          type="text"
+          placeholder="Name eingeben"
+          class="add-members__search-input"
+          [formControl]="searchControl"
+          (focus)="openUserList()"
+        />
+      </div>
+    </div>
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="origin"
+      [cdkConnectedOverlayOpen]="showList()"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      (backdropClick)="closeUserList()"
+    >
+      <div class="add-members__user-list">
+        @for (user of filteredUsers(); track user.id) {
+          <button
+            class="btn btn--user"
+            type="button"
+            (click)="selectUser(user)"
+            [class.btn--selected]="selectedUsers.some((u) => u.id === user.id)"
+          >
+            <div
+              class="users__avatar-wrapper"
+              [class.users__avatar-wrapper--offline]="user.status !== 'online'"
+            >
+              <img class="btn__icon btn__icon--user" [src]="user.avatar" [alt]="user.name" />
+            </div>
+            <div class="btn__text btn__text--user">
+              {{ user.name }}
+            </div>
+          </button>
+        } @empty {
+          <div class="add-members__empty">Keine Benutzer gefunden.</div>
+        }
+      </div>
+    </ng-template>
+  </div>
+  <button class="btn btn--primary" (click)="addMember()"  [disabled]="selectedUsers.length === 0">
+    <span class="btn__text">Hinzufügen</span>
+  </button>
+</div>

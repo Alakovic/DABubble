@@ -1,4 +1,4 @@
-import { Mention, MessageInterface, MessageReaction } from "../interfaces/message-interface";
+import { Mention, MessageInterface, MessageReaction } from '../interfaces/message-interface';
 
 export class Message implements MessageInterface {
   id: string;
@@ -18,18 +18,21 @@ export class Message implements MessageInterface {
     this.mentions = data?.mentions ?? [];
     this.reactions = data?.reactions ?? [];
     this.edited = data?.edited ?? false;
-    this.updatedAt = data?.updatedAt 
+    this.updatedAt = data?.updatedAt;
   }
 
   toJSON() {
-    return {
+    const data: any = {
       senderId: this.senderId,
       text: this.text,
       createdAt: this.createdAt,
       mentions: this.mentions,
       reactions: this.reactions,
       edited: this.edited,
-      updatedAt: this.updatedAt,
     };
+    if (this.updatedAt !== undefined) {
+      data.updatedAt = this.updatedAt;
+    }
+    return data;
   }
 }

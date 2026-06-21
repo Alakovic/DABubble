@@ -8,6 +8,7 @@ import { MessagesService } from '../../../services/messages.service';
 import { ChatService } from '../../../services/chat.service';
 import { Message } from '../../../models/message.class';
 import { UserInterface } from '../../../interfaces/user-interface';
+import { ChannelService } from '../../../services/channel-service';
 
 @Component({
   selector: 'app-chat-message',
@@ -28,6 +29,7 @@ export class ChatMessage {
   editedMessage = signal('');
   showList = signal(false);
   editingMentions = signal<Mention[]>([]);
+  channelService = inject(ChannelService);
 
   emojis = EMOJIS.map((name) => ({
     icon: `assets/img/emojis/${name}.png`,
@@ -76,6 +78,26 @@ export class ChatMessage {
     this.showEmojis.update((show) => !show);
     await this.messageService.addReaction(
       this.chatService.activeChatId(),
+      this.message.id,
+      reactions,
+    );
+  }
+
+  async addReactionChannel(emoji: string) {
+    const userId = this.userService.loggedUser()!.id;
+    const reactions = [...(this.message.reactions ?? [])];
+    const existingReaction = reactions.find((reaction) => reaction.emoji === emoji);
+    if (!existingReaction) {
+      reactions.push({
+        emoji,
+        userIds: [userId],
+      });
+    } else if (!existingReaction.userIds.includes(userId)) {
+      existingReaction.userIds.push(userId);
+    }
+    this.showEmojis.update((show) => !show);
+    await this.messageService.addReactionChannel(
+      this.channelService.selectedChannel()!.id,
       this.message.id,
       reactions,
     );

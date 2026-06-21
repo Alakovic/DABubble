@@ -54,7 +54,59 @@
             </span>
           </div>
         }
-        <app-chat-message [message]="message" ></app-chat-message>
+        <app-chat-message [message]="message"></app-chat-message>
+      }
+    </div>
+  }
+} @else if (isChannelChat) {
+  @if (messagesService.messages().length === 0) {
+    <div class="chat__content chat__content--no-messages">
+      <div
+        class="chat__channel-title chat__channel-title--no-messages"
+        (click)="displayInfo()"
+        cdkOverlayOrigin
+        #origin="cdkOverlayOrigin"
+      >
+        <span class="chat__channel-name"># {{ channel?.name }}</span>
+        <mat-icon> {{ showInfo() ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }} </mat-icon>
+      </div>
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="origin"
+        [cdkConnectedOverlayOpen]="showInfo()"
+        [cdkConnectedOverlayHasBackdrop]="true"
+        (backdropClick)="closeInfo()"
+        (detach)="closeInfo()"
+      >
+        <app-channel-info (close)="closeInfo()"> ></app-channel-info>
+      </ng-template>
+      @if (channel?.createdBy === userService.loggedUser()?.id) {
+        <span class="chat__info">
+          Du hast diesen Channel erstellt. Das ist der Anfang des Channels
+          <span class="chat__info-highlight chat__info-highlight--channel">
+            # {{ channel?.name }}
+          </span></span
+        >
+      } @else {
+        <span class="chat__info">
+          Willkommen im Channel
+          <span class="chat__info-highlight chat__info-highlight--channel"
+            ># {{ channel?.name }} </span
+          >! Es wurden noch keine Nachrichten gepostet.
+        </span>
+      }
+    </div>
+  } @else {
+    <div class="chat__content">
+      @for (message of messagesService.messages(); track message.id; let i = $index) {
+        @if (shouldShowDateSeparator(i)) {
+          <div class="chat__separator">
+            <span class="chat__separator-text">
+              {{ message.createdAt | date: 'EEEE, d. MMMM' }}
+            </span>
+          </div>
+        }
+        <app-chat-message [message]="message"></app-chat-message>
       }
     </div>
   }

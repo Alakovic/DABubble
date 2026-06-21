@@ -1,47 +1,97 @@
-<div class="chat__input">
-  <div class="chat__message-box">
-    <textarea
-      class="chat__input-field"
-      placeholder="Nachricht an {{ user?.name }}"
-      [(ngModel)]="messageText"
-    ></textarea>
-    <div class="chat__input-actions">
-      <button class="btn btn--action" (click)="toggleEmojiPicker()">
-        <mat-icon>sentiment_satisfied</mat-icon>
-      </button>
-      <button class="btn btn--action" (click)="toggleUserList()">
-        <mat-icon>alternate_email</mat-icon>
-      </button>
-      <button class="btn btn--send" (click)="sendMessage()"><mat-icon>send</mat-icon></button>
+@if (isChannelChat) {
+  <div class="chat__input">
+    <div class="chat__message-box">
+      <textarea
+        class="chat__input-field"
+        [(ngModel)]="messageText"
+        placeholder="Nachricht an #{{ channelService.selectedChannel()?.name }}"
+      ></textarea>
+      <div class="chat__input-actions">
+        <button class="btn btn--action" (click)="toggleEmojiPicker()">
+          <mat-icon>sentiment_satisfied</mat-icon>
+        </button>
+        <button class="btn btn--action" (click)="toggleUserList()">
+          <mat-icon>alternate_email</mat-icon>
+        </button>
+        <button class="btn btn--send" (click)="sendMessageChannel()"><mat-icon>send</mat-icon></button>
+      </div>
+      @if (showList()) {
+        <div class="chat__mention-list">
+          @for (user of getMembers(); track user.id) {
+            <button class="btn btn--user" (click)="mentionUser(user)">
+              <div
+                class="users__avatar-wrapper"
+                [class.users__avatar-wrapper--offline]="user.status !== 'online'"
+              >
+                <img class="btn__icon btn__icon--user" [src]="user.avatar" alt="{{ user.name }}" />
+              </div>
+              <div class="btn__text btn__text--user">
+                {{ user.name }}
+                @if (user.email === userService.loggedUser()?.email) {
+                  <span class="users__sufix">(Du)</span>
+                }
+              </div>
+            </button>
+          }
+        </div>
+      }
+      @if (showEmojis()) {
+        <div class="chat__emoji-list">
+          @for (emoji of emojis; track emoji) {
+            <button class="btn btn--emoji" (click)="addEmoji(emoji.value)">
+              <img [src]="emoji.icon" alt="emoji" class="btn__icon btn__icon--emoji" />
+            </button>
+          }
+        </div>
+      }
     </div>
-    @if (showList()) {
-      <div class="chat__mention-list">
-        @for (user of userService.allUsers(); track user.id) {
-          <button class="btn btn--user" (click)="mentionUser(user)">
-            <div
-              class="users__avatar-wrapper"
-              [class.users__avatar-wrapper--offline]="user.status !== 'online'"
-            >
-              <img class="btn__icon btn__icon--user" [src]="user.avatar" alt="{{ user.name }}" />
-            </div>
-            <div class="btn__text btn__text--user">
-              {{ user.name }}
-              @if (user.email === userService.loggedUser()?.email) {
-                <span class="users__sufix">(Du)</span>
-              }
-            </div>
-          </button>
-        }
-      </div>
-    }
-    @if (showEmojis()) {
-      <div class="chat__emoji-list">
-        @for (emoji of emojis; track emoji) {
-          <button class="btn btn--emoji" (click)="addEmoji(emoji.value)">
-            <img [src]="emoji.icon" alt="emoji" class="btn__icon btn__icon--emoji" />
-          </button>
-        }
-      </div>
-    }
   </div>
-</div>
+} @else {
+  <div class="chat__input">
+    <div class="chat__message-box">
+      <textarea
+        class="chat__input-field"
+        placeholder="Nachricht an {{ user?.name }}"
+        [(ngModel)]="messageText"
+      ></textarea>
+      <div class="chat__input-actions">
+        <button class="btn btn--action" (click)="toggleEmojiPicker()">
+          <mat-icon>sentiment_satisfied</mat-icon>
+        </button>
+        <button class="btn btn--action" (click)="toggleUserList()">
+          <mat-icon>alternate_email</mat-icon>
+        </button>
+        <button class="btn btn--send" (click)="sendMessage()"><mat-icon>send</mat-icon></button>
+      </div>
+      @if (showList()) {
+        <div class="chat__mention-list">
+          @for (user of userService.allUsers(); track user.id) {
+            <button class="btn btn--user" (click)="mentionUser(user)">
+              <div
+                class="users__avatar-wrapper"
+                [class.users__avatar-wrapper--offline]="user.status !== 'online'"
+              >
+                <img class="btn__icon btn__icon--user" [src]="user.avatar" alt="{{ user.name }}" />
+              </div>
+              <div class="btn__text btn__text--user">
+                {{ user.name }}
+                @if (user.email === userService.loggedUser()?.email) {
+                  <span class="users__sufix">(Du)</span>
+                }
+              </div>
+            </button>
+          }
+        </div>
+      }
+      @if (showEmojis()) {
+        <div class="chat__emoji-list">
+          @for (emoji of emojis; track emoji) {
+            <button class="btn btn--emoji" (click)="addEmoji(emoji.value)">
+              <img [src]="emoji.icon" alt="emoji" class="btn__icon btn__icon--emoji" />
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}
